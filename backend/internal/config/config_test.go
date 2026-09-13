@@ -2,12 +2,19 @@ package config
 
 import "testing"
 
+// validJWTSecret satisfies Load's minJWTSecretLength (32) requirement so
+// tests that expect a successful Load() aren't coupled to the exact
+// minimum length enforced in config.go.
+const validJWTSecret = "test-only-secret-not-for-production-use"
+
 func clearEnv(t *testing.T) {
 	t.Helper()
 	keys := []string{
 		"APP_ENV", "PORT",
 		"DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD", "DB_SSLMODE",
 		"DATABASE_URL", "FRONTEND_URL",
+		"JWT_ACCESS_SECRET", "JWT_ACCESS_TTL_MINUTES", "REFRESH_TOKEN_TTL_DAYS",
+		"COOKIE_SECURE", "COOKIE_DOMAIN",
 	}
 	for _, k := range keys {
 		t.Setenv(k, "")
@@ -18,6 +25,7 @@ func TestLoad_ValidWithDatabaseURL(t *testing.T) {
 	clearEnv(t)
 	t.Setenv("FRONTEND_URL", "http://localhost:3000")
 	t.Setenv("DATABASE_URL", "postgres://user:pass@localhost:5432/db?sslmode=disable")
+	t.Setenv("JWT_ACCESS_SECRET", validJWTSecret)
 
 	cfg, err := Load()
 	if err != nil {
@@ -39,6 +47,7 @@ func TestLoad_ValidWithDiscreteDBVars(t *testing.T) {
 	t.Setenv("DB_NAME", "marketplace")
 	t.Setenv("DB_USER", "postgres")
 	t.Setenv("DB_PASSWORD", "postgres")
+	t.Setenv("JWT_ACCESS_SECRET", validJWTSecret)
 
 	cfg, err := Load()
 	if err != nil {

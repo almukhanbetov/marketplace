@@ -1,0 +1,101 @@
+# Production stack for the Nova Marketplace VPS (/opt/nova).
+#
+# Real secrets live only in /opt/nova/.env on the VPS (see
+# .env.prod.example at the repo root for the required variable names) —
+# nothing here is templated from GitHub Actions on every deploy.
+#
+# Postgres is reachable only on the internal network; backend/frontend are
+# published on 127.0.0.1 only, for a host-level Nginx to reverse-proxy.
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      # $$ (not $) so Compose passes the variable through literally and it
+      # is expanded by the container's own shell from the values env_file
+      # already injected — an unescaped ${POSTGRES_USER} here would be
+      # substituted by the `docker compose` CLI itself at parse time (from
+      # the shell/interpolation environment, NOT from .env's real secret),
+      # silently overriding the real value with an empty string.
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    networks:
+      - internal
+    # No `ports:` — Postgres is never reachable from outside the Docker
+    # network, not even via localhost on the host.
+
+  # One-shot forward-only migration runner. Applies pending Goose
+  # migrations ("up" only — see backend/Dockerfile's migrate target) and
+  # exits. `docker compose up -d` on backend must not proceed if this
+  # container exits non-zero.
+  migrate:
+    image: ghcr.io/almukhanbetov/marketplace-migrate:${IMAGE_TAG:-latest}
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - internal
+    restart: "no"
+
+  backend:
+    image: ghcr.io/almukhanbetov/marketplace-backend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      # Compose refuses to start backend until the migrate one-shot has
+      # exited 0 — a failed migration blocks the new backend from ever
+      # coming up, leaving the previously running container (if any) in
+      # place instead of a half-migrated deploy.
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    ports:
+      - "127.0.0.1:8080:8080"
+    networks:
+      - internal
+
+  frontend:
+    image: ghcr.io/almukhanbetov/marketplace-frontend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - internal
+    # Frontend never talks to Postgres directly, and it does not need the
+    # `internal` network for its own traffic — browsers call
+    # api.kungey-ayuly.kz directly. It stays on this network only so a host
+    # Nginx (outside Compose) can reach it via the localhost port binding,
+    # same as backend.
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  pg_data:

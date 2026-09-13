@@ -1,0 +1,27 @@
+# environment / secrets
+.env
+.env.*
+
+# git
+.git
+.gitignore
+
+# build artifacts
+/bin/
+/tmp/
+*.exe
+*.test
+*.out
+
+# go
+/vendor/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# docs (not needed inside the image)
+README.md

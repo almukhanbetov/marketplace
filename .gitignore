@@ -1,0 +1,6 @@
+# Real production secrets for docker-compose.prod.yml — never commit this.
+# See .env.prod.example for the variable names it must contain.
+.env
+
+# OS
+.DS_Store
