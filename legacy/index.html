@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova — маркетплейс нового поколения</title>
+<meta name="description" content="Nova — премиальный маркетплейс: электроника, мода, дом и тысячи продавцов в одном месте.">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержимому</a>
+
+<!-- ============================== HEADER ============================== -->
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="container">
+      <div class="utility-left">
+        <button type="button">📍 <span data-i18n="deliverTo">Алматы</span></button>
+        <a href="#" data-i18n="pickupPoints">Пункты выдачи</a>
+        <a href="#" data-i18n="forBusiness">Для бизнеса</a>
+        <a href="seller-dashboard.html" data-i18n="sellOnMp">Продавать на Nova</a>
+        <a href="#" data-i18n="help">Помощь</a>
+      </div>
+      <div class="utility-right">
+        <div class="lang-switch">
+          <button data-lang-btn="kk">KAZ</button>
+          <button data-lang-btn="ru" class="active">RU</button>
+          <button data-lang-btn="en">ENG</button>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="Сменить тему">☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-mark">N</span>Nova<span>.</span></a>
+
+      <div class="catalog-menu-wrap">
+        <button class="catalog-trigger" data-catalog-trigger aria-expanded="false" aria-haspopup="true">
+          <span class="icon-burger"><span></span><span></span><span></span></span>
+          <span class="label-text" data-i18n="catalog">Каталог</span>
+        </button>
+        <div class="megamenu" data-megamenu></div>
+      </div>
+
+      <div class="search-wrap" data-search-wrap>
+        <form class="search-bar" role="search">
+          <label class="search-cat"><span data-i18n="allCategories">Все категории</span> ▾</label>
+          <input type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Что вы ищете?" autocomplete="off" aria-label="Поиск">
+          <button type="button" class="search-clear" aria-label="Очистить поиск">✕</button>
+          <button type="submit" class="search-submit" aria-label="Искать">🔍</button>
+        </form>
+        <div class="search-panel" data-search-panel></div>
+      </div>
+
+      <nav class="header-actions" aria-label="Действия пользователя">
+        <div style="position:relative">
+          <button class="header-action hide-tablet" data-notif-trigger aria-label="Уведомления">
+            <span class="ha-icon">🔔<span class="ha-count" data-notif-count>0</span></span>
+            <span class="ha-label" data-i18n="notifications">Уведомления</span>
+          </button>
+          <div class="notif-panel" data-notif-panel>
+            <div class="notif-panel-head"><span data-i18n="notifications">Уведомления</span><button data-notif-mark-all data-i18n="markAllRead">Прочитать все</button></div>
+            <div class="notif-list"></div>
+          </div>
+        </div>
+
+        <div style="position:relative">
+          <button class="header-action desktop-only" data-user-trigger aria-label="Профиль">
+            <span class="ha-icon">👤</span>
+            <span class="ha-label" data-i18n="profile">Профиль</span>
+          </button>
+          <div class="user-panel" data-user-panel>
+            <div data-auth-guest>
+              <button data-modal-open="login-modal">🔑 <span data-i18n="login">Войти</span></button>
+              <button data-modal-open="register-modal">📝 <span data-i18n="register">Регистрация</span></button>
+            </div>
+            <div data-auth-user style="display:none">
+              <a href="profile.html">👤 <span data-auth-name>Пользователь</span></a>
+              <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+              <a href="favorites.html" data-i18n="favorites">Избранное</a>
+              <a href="profile.html" data-i18n="settings">Настройки</a>
+              <div class="user-panel-divider"></div>
+              <button data-logout>🚪 <span data-i18n="logout">Выйти</span></button>
+            </div>
+          </div>
+        </div>
+
+        <a href="profile.html" class="header-action hide-tablet">
+          <span class="ha-icon">📦</span>
+          <span class="ha-label" data-i18n="orders">Заказы</span>
+        </a>
+
+        <a href="favorites.html" class="header-action">
+          <span class="ha-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="favorites">Избранное</span>
+        </a>
+
+        <button class="header-action" data-cart-trigger data-cart-icon>
+          <span class="ha-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="cart">Корзина</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+  <div class="megamenu-backdrop" data-megamenu-backdrop></div>
+</header>
+
+<!-- ============================== MAIN ============================== -->
+<main id="main">
+
+  <section class="page-section page-section--tight container">
+    <div class="hero-grid" data-hero-slider>
+      <div class="hero-banner">
+        <div class="hero-slide active" data-slide>
+          <span class="eyebrow" data-i18n="flashSale">Flash Sale</span>
+          <h1 data-i18n="heroTitle">Технологии нового поколения</h1>
+          <p data-i18n="heroSubtitle">Скидки до 40% на флагманскую электронику. Только 3 дня.</p>
+          <a href="catalog.html?cat=electronics&sort=discount" class="btn btn--accent btn--lg" data-i18n="shopNow">Смотреть предложение</a>
+        </div>
+        <div class="hero-slide" data-slide>
+          <span class="eyebrow">Новая коллекция</span>
+          <h1>Стиль, который выделяет</h1>
+          <p>Модные новинки сезона от 200+ проверенных продавцов.</p>
+          <a href="catalog.html?cat=fashion" class="btn btn--accent btn--lg">Перейти в раздел</a>
+        </div>
+        <div class="hero-slide" data-slide>
+          <span class="eyebrow">Для дома</span>
+          <h1>Уют начинается здесь</h1>
+          <p>Мебель, техника и décor с доставкой за 24 часа.</p>
+          <a href="catalog.html?cat=home" class="btn btn--accent btn--lg">Выбрать товары</a>
+        </div>
+        <button class="hero-arrow hero-arrow--prev" data-hero-prev aria-label="Предыдущий баннер">‹</button>
+        <button class="hero-arrow hero-arrow--next" data-hero-next aria-label="Следующий баннер">›</button>
+        <div class="hero-dots">
+          <button data-dot class="active" aria-label="Слайд 1"></button>
+          <button data-dot aria-label="Слайд 2"></button>
+          <button data-dot aria-label="Слайд 3"></button>
+        </div>
+      </div>
+      <div class="hero-promos">
+        <a href="catalog.html?cat=computers" class="promo-card promo-card--a">
+          <b>Ноутбуки для работы</b>
+          <span>Рассрочка 0% на 24 месяца</span>
+        </a>
+        <a href="catalog.html?sort=new" class="promo-card promo-card--b">
+          <b>Только что в каталоге</b>
+          <span>1200+ новых товаров на этой неделе</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-head">
+      <h2 data-i18n="categoriesTitle">Популярные категории</h2>
+    </div>
+    <div class="grid-categories" id="home-categories"></div>
+  </section>
+
+  <section class="page-section container">
+    <div class="flash-sale">
+      <div class="flash-head">
+        <div class="flash-title"><span class="flash-icon">⚡</span><span data-i18n="flashSale">Flash Sale</span></div>
+        <div class="flash-timer" data-countdown>
+          <span class="unit" data-cd-h>02</span><span class="colon">:</span>
+          <span class="unit" data-cd-m>41</span><span class="colon">:</span>
+          <span class="unit" data-cd-s>17</span>
+        </div>
+        <a href="catalog.html?sort=discount" class="btn btn--accent flash-cta" data-i18n="viewAll">Смотреть все</a>
+      </div>
+      <div class="carousel-wrap">
+        <button class="carousel-nav carousel-nav--prev" aria-label="Назад">‹</button>
+        <div class="carousel-track" id="flash-sale-track"></div>
+        <button class="carousel-nav carousel-nav--next" aria-label="Вперёд">›</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-head">
+      <div><h2 data-i18n="forYou">Для вас</h2><div class="section-sub">Персональная подборка на основе ваших интересов</div></div>
+      <a href="catalog.html" class="btn btn--ghost" data-i18n="viewAll">Смотреть все</a>
+    </div>
+    <div class="grid-products" id="grid-for-you"></div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-head">
+      <h2 data-i18n="bestSellers">Хиты продаж</h2>
+      <a href="catalog.html?sort=popular" class="btn btn--ghost" data-i18n="viewAll">Смотреть все</a>
+    </div>
+    <div class="carousel-wrap">
+      <button class="carousel-nav carousel-nav--prev" aria-label="Назад">‹</button>
+      <div class="carousel-track" id="carousel-bestsellers"></div>
+      <button class="carousel-nav carousel-nav--next" aria-label="Вперёд">›</button>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-head">
+      <h2 data-i18n="onSaleNow">Сейчас со скидкой</h2>
+      <a href="catalog.html?sort=discount" class="btn btn--ghost" data-i18n="viewAll">Смотреть все</a>
+    </div>
+    <div class="grid-products" id="grid-onsale"></div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-head">
+      <h2 data-i18n="newArrivals">Новинки</h2>
+      <a href="catalog.html?sort=new" class="btn btn--ghost" data-i18n="viewAll">Смотреть все</a>
+    </div>
+    <div class="carousel-wrap">
+      <button class="carousel-nav carousel-nav--prev" aria-label="Назад">‹</button>
+      <div class="carousel-track" id="carousel-new"></div>
+      <button class="carousel-nav carousel-nav--next" aria-label="Вперёд">›</button>
+    </div>
+  </section>
+
+  <section class="page-section container" data-recent-section style="display:none">
+    <div class="section-head">
+      <h2 data-i18n="recentlyViewed">Вы недавно смотрели</h2>
+    </div>
+    <div class="grid-products" id="grid-recent"></div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-head">
+      <h2 data-i18n="mayLike">Возможно, вам понравится</h2>
+    </div>
+    <div class="grid-products" id="grid-recommend"></div>
+  </section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Nova</h5>
+        <a href="#">О компании</a>
+        <a href="#">Карьера</a>
+        <a href="seller-dashboard.html">Продавать на Nova</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="catalog">Каталог</h5>
+        <a href="catalog.html?cat=electronics">Электроника</a>
+        <a href="catalog.html?cat=fashion">Одежда</a>
+        <a href="catalog.html?cat=home">Дом</a>
+        <a href="catalog.html?cat=beauty">Красота</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="help">Помощь</h5>
+        <a href="#">Доставка и оплата</a>
+        <a href="#">Возврат товара</a>
+        <a href="#">Условия использования</a>
+        <a href="#">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Покупателям</h5>
+        <a href="cart.html" data-i18n="cart">Корзина</a>
+        <a href="favorites.html" data-i18n="favorites">Избранное</a>
+        <a href="compare.html" data-i18n="compare">Сравнить</a>
+        <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+      </div>
+      <div class="footer-col">
+        <h5>Продавцам</h5>
+        <a href="seller.html">Магазин TechStore</a>
+        <a href="seller-dashboard.html">Кабинет продавца</a>
+        <a href="seller-dashboard.html">Комиссия и тарифы</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nova Marketplace. Все права защищены.</span>
+      <span>Frontend prototype · v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================== MOBILE NAV ============================== -->
+<nav class="mobile-nav" aria-label="Мобильная навигация">
+  <a href="index.html"><span class="mn-icon">🏠</span><span data-i18n="home">Главная</span></a>
+  <a href="catalog.html"><span class="mn-icon">📂</span><span data-i18n="catalog">Каталог</span></a>
+  <a href="favorites.html"><span class="mn-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span><span data-i18n="favorites">Избранное</span></a>
+  <a href="cart.html"><span class="mn-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span><span data-i18n="cart">Корзина</span></a>
+  <a href="profile.html"><span class="mn-icon">👤</span><span data-i18n="profile">Профиль</span></a>
+</nav>
+
+<!-- ============================== CART DRAWER ============================== -->
+<div class="drawer-backdrop" data-cart-backdrop></div>
+<aside class="drawer" data-cart-drawer aria-label="Корзина">
+  <div class="drawer-head">
+    <h3 data-i18n="yourCart">Корзина</h3>
+    <button class="modal-close" data-cart-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="drawer-body" data-cart-drawer-body></div>
+  <div class="drawer-summary" data-cart-drawer-summary></div>
+</aside>
+
+<!-- ============================== MODALS ============================== -->
+<div class="modal-backdrop" id="login-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal-head"><h3 id="login-title" data-i18n="login">Войти</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" data-login-form>
+      <div class="field"><label for="login-name" data-i18n="name">Имя</label><input id="login-name" name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label for="login-email">Email</label><input id="login-email" name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="login-pass">Пароль</label><input id="login-pass" type="password" placeholder="••••••••" required></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="login">Войти</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="register-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="register-title">
+    <div class="modal-head"><h3 id="register-title" data-i18n="register">Регистрация</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" onsubmit="event.preventDefault(); Auth.login(this.name.value || 'Новый пользователь', this.email.value); ModalManager.close('register-modal'); Toast.show('Аккаунт создан','success','✓');">
+      <div class="field"><label data-i18n="name">Имя</label><input name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label>Телефон</label><input name="phone" type="tel" placeholder="+7 700 000 00 00"></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="register">Регистрация</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="quickview-modal">
+  <div class="modal modal--lg" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+    <div class="modal-head"><h3 id="qv-title" data-i18n="quickView">Быстрый просмотр</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/translations.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/language.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+<script>
+  function renderHome() {
+    const lang = LanguageManager.get();
+    document.getElementById("home-categories").innerHTML = homeCategories
+      .map(
+        (c) => `
+      <a class="cat-tile" href="catalog.html?cat=${c.cat}">
+        <div class="cat-tile-img">${c.icon}</div>
+        <span>${c.label[lang]}</span>
+      </a>`
+      )
+      .join("");
+
+    renderGrid("#grid-for-you", products.slice(0, 12));
+    renderGrid("#carousel-bestsellers", [...products].sort((a, b) => b.reviews - a.reviews).slice(0, 10));
+    renderGrid("#grid-onsale", [...products].sort((a, b) => b.discount - a.discount).slice(0, 12));
+    renderGrid("#carousel-new", [...products].reverse().slice(0, 10));
+    renderGrid("#flash-sale-track", products.filter((p) => p.flashSale));
+    renderRecentlyViewed("#grid-recent");
+    renderRecommendations("#grid-recommend");
+    addFlashStockBars();
+  }
+
+  function addFlashStockBars() {
+    document.querySelectorAll("#flash-sale-track .pc-body").forEach((body, i) => {
+      const p = products.filter((x) => x.flashSale)[i];
+      if (!p || body.querySelector(".pc-stock-bar")) return;
+      const bar = document.createElement("div");
+      bar.className = "pc-stock-bar";
+      bar.innerHTML = `<div class="stock-bar-track"><div class="stock-bar-fill" style="width:${p.flashSoldPct}%"></div></div><div class="stock-bar-label">Продано ${p.flashSoldPct}%</div>`;
+      body.insertBefore(bar, body.querySelector(".pc-cart-btn"));
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", renderHome);
+  document.addEventListener("langchange", renderHome);
+</script>
+</body>
+</html>

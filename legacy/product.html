@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Товар — Nova Marketplace</title>
+<meta name="description" content="Страница товара Nova Marketplace: галерея, продавцы, отзывы и вопросы.">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="container">
+      <div class="utility-left">
+        <button type="button">📍 <span data-i18n="deliverTo">Алматы</span></button>
+        <a href="#" data-i18n="pickupPoints">Пункты выдачи</a>
+        <a href="#" data-i18n="forBusiness">Для бизнеса</a>
+        <a href="seller-dashboard.html" data-i18n="sellOnMp">Продавать на Nova</a>
+        <a href="#" data-i18n="help">Помощь</a>
+      </div>
+      <div class="utility-right">
+        <div class="lang-switch">
+          <button data-lang-btn="kk">KAZ</button>
+          <button data-lang-btn="ru" class="active">RU</button>
+          <button data-lang-btn="en">ENG</button>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="Сменить тему">☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-mark">N</span>Nova<span>.</span></a>
+
+      <div class="catalog-menu-wrap">
+        <button class="catalog-trigger" data-catalog-trigger aria-expanded="false" aria-haspopup="true">
+          <span class="icon-burger"><span></span><span></span><span></span></span>
+          <span class="label-text" data-i18n="catalog">Каталог</span>
+        </button>
+        <div class="megamenu" data-megamenu></div>
+      </div>
+
+      <div class="search-wrap" data-search-wrap>
+        <form class="search-bar" role="search">
+          <label class="search-cat"><span data-i18n="allCategories">Все категории</span> ▾</label>
+          <input type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Что вы ищете?" autocomplete="off" aria-label="Поиск">
+          <button type="button" class="search-clear" aria-label="Очистить поиск">✕</button>
+          <button type="submit" class="search-submit" aria-label="Искать">🔍</button>
+        </form>
+        <div class="search-panel" data-search-panel></div>
+      </div>
+
+      <nav class="header-actions" aria-label="Действия пользователя">
+        <div style="position:relative">
+          <button class="header-action hide-tablet" data-notif-trigger aria-label="Уведомления">
+            <span class="ha-icon">🔔<span class="ha-count" data-notif-count>0</span></span>
+            <span class="ha-label" data-i18n="notifications">Уведомления</span>
+          </button>
+          <div class="notif-panel" data-notif-panel>
+            <div class="notif-panel-head"><span data-i18n="notifications">Уведомления</span><button data-notif-mark-all data-i18n="markAllRead">Прочитать все</button></div>
+            <div class="notif-list"></div>
+          </div>
+        </div>
+
+        <div style="position:relative">
+          <button class="header-action desktop-only" data-user-trigger aria-label="Профиль">
+            <span class="ha-icon">👤</span>
+            <span class="ha-label" data-i18n="profile">Профиль</span>
+          </button>
+          <div class="user-panel" data-user-panel>
+            <div data-auth-guest>
+              <button data-modal-open="login-modal">🔑 <span data-i18n="login">Войти</span></button>
+              <button data-modal-open="register-modal">📝 <span data-i18n="register">Регистрация</span></button>
+            </div>
+            <div data-auth-user style="display:none">
+              <a href="profile.html">👤 <span data-auth-name>Пользователь</span></a>
+              <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+              <a href="favorites.html" data-i18n="favorites">Избранное</a>
+              <a href="profile.html" data-i18n="settings">Настройки</a>
+              <div class="user-panel-divider"></div>
+              <button data-logout>🚪 <span data-i18n="logout">Выйти</span></button>
+            </div>
+          </div>
+        </div>
+
+        <a href="profile.html" class="header-action hide-tablet">
+          <span class="ha-icon">📦</span>
+          <span class="ha-label" data-i18n="orders">Заказы</span>
+        </a>
+
+        <a href="favorites.html" class="header-action">
+          <span class="ha-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="favorites">Избранное</span>
+        </a>
+
+        <button class="header-action" data-cart-trigger data-cart-icon>
+          <span class="ha-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="cart">Корзина</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+  <div class="megamenu-backdrop" data-megamenu-backdrop></div>
+</header>
+
+<main id="main">
+
+<div class="container page-section--tight">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="index.html" data-i18n="home">Главная</a><span aria-hidden="true">/</span>
+    <a href="catalog.html" id="crumb-cat">Категория</a><span aria-hidden="true">/</span>
+    <span id="crumb-title">Товар</span>
+  </nav>
+</div>
+
+<div class="container page-section--tight">
+  <div class="pdp-grid" id="pdp-root" style="display:grid;grid-template-columns:460px 1fr 340px;gap:30px;align-items:start"></div>
+</div>
+
+<div class="container page-section">
+  <div class="section-head"><h2 data-i18n="otherSellers">Другие продавцы</h2></div>
+  <div id="offers-list"></div>
+</div>
+
+<div class="container page-section">
+  <div class="tab-row">
+    <button class="tab-btn active" data-tab="reviews" data-i18n="reviews">отзывов</button>
+    <button class="tab-btn" data-tab="questions" data-i18n="productQuestions">Вопросы о товаре</button>
+    <button class="tab-btn" data-tab="specs">Характеристики</button>
+  </div>
+
+  <div class="tab-panel active" data-tab-panel="reviews">
+    <div class="review-summary" id="review-summary"></div>
+    <div style="margin-top:24px" id="review-list"></div>
+  </div>
+
+  <div class="tab-panel" data-tab-panel="questions">
+    <div id="questions-list"></div>
+    <button class="btn btn--outline" style="margin-top:16px" id="ask-question-btn" data-i18n="askQuestion">Задать вопрос</button>
+  </div>
+
+  <div class="tab-panel" data-tab-panel="specs">
+    <div class="info-card">
+      <table class="data-table">
+        <tbody id="specs-table"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container page-section" data-recent-section style="display:none">
+  <div class="section-head"><h2 data-i18n="recentlyViewed">Вы недавно смотрели</h2></div>
+  <div class="grid-products" id="grid-recent"></div>
+</div>
+
+<div class="container page-section">
+  <div class="section-head"><h2 data-i18n="mayLike">Возможно, вам понравится</h2></div>
+  <div class="grid-products" id="grid-recommend"></div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Nova</h5>
+        <a href="#">О компании</a>
+        <a href="#">Карьера</a>
+        <a href="seller-dashboard.html">Продавать на Nova</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="catalog">Каталог</h5>
+        <a href="catalog.html?cat=electronics">Электроника</a>
+        <a href="catalog.html?cat=fashion">Одежда</a>
+        <a href="catalog.html?cat=home">Дом</a>
+        <a href="catalog.html?cat=beauty">Красота</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="help">Помощь</h5>
+        <a href="#">Доставка и оплата</a>
+        <a href="#">Возврат товара</a>
+        <a href="#">Условия использования</a>
+        <a href="#">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Покупателям</h5>
+        <a href="cart.html" data-i18n="cart">Корзина</a>
+        <a href="favorites.html" data-i18n="favorites">Избранное</a>
+        <a href="compare.html" data-i18n="compare">Сравнить</a>
+        <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+      </div>
+      <div class="footer-col">
+        <h5>Продавцам</h5>
+        <a href="seller.html">Магазин TechStore</a>
+        <a href="seller-dashboard.html">Кабинет продавца</a>
+        <a href="seller-dashboard.html">Комиссия и тарифы</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nova Marketplace. Все права защищены.</span>
+      <span>Frontend prototype · v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-nav" aria-label="Мобильная навигация">
+  <a href="index.html" class=""><span class="mn-icon">🏠</span><span data-i18n="home">Главная</span></a>
+  <a href="catalog.html" class=""><span class="mn-icon">📂</span><span data-i18n="catalog">Каталог</span></a>
+  <a href="favorites.html" class=""><span class="mn-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span><span data-i18n="favorites">Избранное</span></a>
+  <a href="cart.html" class=""><span class="mn-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span><span data-i18n="cart">Корзина</span></a>
+  <a href="profile.html" class=""><span class="mn-icon">👤</span><span data-i18n="profile">Профиль</span></a>
+</nav>
+
+<div class="drawer-backdrop" data-cart-backdrop></div>
+<aside class="drawer" data-cart-drawer aria-label="Корзина">
+  <div class="drawer-head">
+    <h3 data-i18n="yourCart">Корзина</h3>
+    <button class="modal-close" data-cart-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="drawer-body" data-cart-drawer-body></div>
+  <div class="drawer-summary" data-cart-drawer-summary></div>
+</aside>
+
+<div class="modal-backdrop" id="login-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal-head"><h3 id="login-title" data-i18n="login">Войти</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" data-login-form>
+      <div class="field"><label for="login-name" data-i18n="name">Имя</label><input id="login-name" name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label for="login-email">Email</label><input id="login-email" name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="login-pass">Пароль</label><input id="login-pass" type="password" placeholder="••••••••" required></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="login">Войти</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="register-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="register-title">
+    <div class="modal-head"><h3 id="register-title" data-i18n="register">Регистрация</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" onsubmit="event.preventDefault(); Auth.login(this.name.value || 'Новый пользователь', this.email.value); ModalManager.close('register-modal'); Toast.show('Аккаунт создан','success','✓');">
+      <div class="field"><label data-i18n="name">Имя</label><input name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label>Телефон</label><input name="phone" type="tel" placeholder="+7 700 000 00 00"></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="register">Регистрация</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="quickview-modal">
+  <div class="modal modal--lg" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+    <div class="modal-head"><h3 id="qv-title" data-i18n="quickView">Быстрый просмотр</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="gallery-modal">
+  <div class="modal modal--xl" role="dialog" aria-modal="true">
+    <div class="modal-head"><h3>Галерея</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <div class="modal-body" style="align-items:center">
+      <img id="gallery-fullscreen-img" style="max-height:70vh;border-radius:var(--radius-md);margin:0 auto">
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" id="ask-question-modal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head"><h3 data-i18n="askQuestion">Задать вопрос</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" id="ask-question-form">
+      <div class="field"><label>Ваш вопрос</label><textarea name="question" required placeholder="Например: Есть ли гарантия?"></textarea></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="askQuestion">Задать вопрос</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/translations.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/language.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+
+const pid = Number(new URLSearchParams(location.search).get("id")) || 1;
+let product = getProductById(pid) || products[0];
+let selectedColor = null;
+let selectedSize = null;
+let galleryIndex = 0;
+let selectedOfferSeller = null;
+
+const mockReviews = [
+  { name: "Динара А.", date: "12 августа 2026", rating: 5, text: "Отличный товар, полностью соответствует описанию! Доставили на день раньше.", helpful: 24, photos: true },
+  { name: "Ерлан С.", date: "3 августа 2026", rating: 4, text: "Хорошее качество за свою цену, но упаковка была немного повреждена при доставке.", helpful: 11, photos: false },
+  { name: "Мадина Т.", date: "28 июля 2026", rating: 5, text: "Пользуюсь уже месяц — полет нормальный. Рекомендую этого продавца.", helpful: 8, photos: true },
+];
+
+const mockQuestions = [
+  { q: "Есть ли официальная гарантия?", a: "Да, гарантия производителя 12 месяцев, плюс 6 месяцев от продавца.", author: "Тимур К." },
+  { q: "Возможна ли доставка в другой город?", a: "Да, доставляем по всему Казахстану через партнёрскую логистику.", author: "Асель Ж." },
+];
+
+function renderPDP() {
+  const lang = LanguageManager.get();
+  const cat = categories.find((c) => c.id === product.category);
+  document.getElementById("crumb-cat").textContent = cat ? cat.label[lang] : product.category;
+  document.getElementById("crumb-cat").href = "catalog.html?cat=" + product.category;
+  document.getElementById("crumb-title").textContent = product.title;
+  document.title = product.title + " — Nova Marketplace";
+
+  const images = [product.image, product.image2, product.image, product.image2];
+
+  document.getElementById("pdp-root").innerHTML = `
+    <div>
+      <div class="quickview-img" id="gallery-main" style="cursor:zoom-in;position:relative">
+        <img src="${images[0]}" alt="${product.title}" id="gallery-main-img">
+        <button class="hero-arrow hero-arrow--prev" id="gallery-prev" style="left:8px" aria-label="Предыдущее фото">‹</button>
+        <button class="hero-arrow hero-arrow--next" id="gallery-next" style="right:8px" aria-label="Следующее фото">›</button>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:10px" id="gallery-thumbs">
+        ${images.map((img, i) => `<button style="width:64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid ${i === 0 ? "var(--accent)" : "var(--border)"};flex-shrink:0" data-thumb="${i}"><img src="${img}" style="width:100%;height:100%;object-fit:cover"></button>`).join("")}
+      </div>
+    </div>
+
+    <div>
+      <div class="pc-brand">${product.brand}</div>
+      <h1 style="font-size:var(--fs-2xl);font-weight:800;margin:6px 0 10px;line-height:1.15">${product.title}</h1>
+      <div class="pc-rating" style="font-size:var(--fs-sm);margin-bottom:16px">
+        <span class="stars">★★★★★</span><b>${product.rating}</b> &middot; ${product.reviews} ${t("reviews")}
+      </div>
+
+      ${product.colors ? `<div style="margin-bottom:18px">
+        <div class="eyebrow" style="margin-bottom:8px">${t("color")}</div>
+        <div class="color-swatch-row" id="color-swatches">
+          ${product.colors.map((c, i) => `<button class="color-swatch ${i === 0 ? "active" : ""}" style="background:${c}" data-color="${c}" aria-label="Цвет ${c}"></button>`).join("")}
+        </div>
+      </div>` : ""}
+
+      ${product.sizes ? `<div style="margin-bottom:18px">
+        <div class="eyebrow" style="margin-bottom:8px">${t("size")}</div>
+        <div style="display:flex;gap:8px" id="size-options">
+          ${product.sizes.map((s, i) => `<button class="btn ${i === 0 ? "btn--primary" : "btn--outline"} btn--sm" data-size="${s}">${s}</button>`).join("")}
+        </div>
+      </div>` : ""}
+
+      <div style="margin-bottom:18px">
+        <div class="eyebrow" style="margin-bottom:8px">${t("productQuestions")}</div>
+        <div id="pdp-questions-preview" style="font-size:var(--fs-xs);color:var(--text-2)">${mockQuestions.length} ${lang === "en" ? "questions answered" : "вопроса с ответами"}</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="info-card">
+        <div class="pc-price-row" style="margin-bottom:6px">
+          <span class="pc-price" style="font-size:var(--fs-2xl)">${formatPrice(product.price)}</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
+          <span class="pc-price-old">${formatPrice(product.oldPrice)}</span>
+          <span class="badge badge--sale">−${product.discount}%</span>
+        </div>
+        <div class="pc-installment" style="margin-bottom:14px">${t("from")} <b>${formatPrice(product.installment)}</b> × 24 ${t("installmentSuffix")}</div>
+
+        <div class="pc-delivery" style="margin-bottom:6px">🚚 ${deliveryLabel(product.delivery)}, ${t("free")}</div>
+        <div class="pc-seller" style="border:none;padding-top:6px">
+          <span>${t("sellerLabel")}: <a href="seller.html?id=${product.sellerId}"><b>${product.seller}</b></a></span>
+          <span class="stars">★${product.sellerRating}</span>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;margin:16px 0">
+          <span style="font-size:var(--fs-xs);color:var(--text-2)">${t("quantity")}</span>
+          <div class="qty-stepper" id="pdp-qty">
+            <button data-pdp-qty-minus>−</button><span id="pdp-qty-value">1</span><button data-pdp-qty-plus>+</button>
+          </div>
+        </div>
+
+        <button class="btn btn--accent btn--lg btn--block" id="pdp-buy-now" style="margin-bottom:10px">${t("buyNow")}</button>
+        <button class="btn btn--primary btn--lg btn--block" id="pdp-add-cart">🛒 ${t("addToCart")}</button>
+        <button class="btn btn--outline btn--lg btn--block" id="pdp-fav-btn" style="margin-top:10px">♡ ${t("favorites")}</button>
+      </div>
+    </div>
+  `;
+
+  wirePDP();
+  renderGallery();
+  renderOffers();
+  renderReviews();
+  renderQuestions();
+  renderSpecs();
+  addRecentlyViewed(product.id);
+  renderRecentlyViewed("#grid-recent");
+  renderRecommendations("#grid-recommend");
+}
+
+function renderGallery() {
+  document.querySelectorAll("[data-thumb]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      galleryIndex = Number(btn.getAttribute("data-thumb"));
+      updateGalleryImage();
+    });
+  });
+  document.getElementById("gallery-prev").addEventListener("click", (e) => { e.stopPropagation(); galleryIndex = (galleryIndex + 3) % 4; updateGalleryImage(); });
+  document.getElementById("gallery-next").addEventListener("click", (e) => { e.stopPropagation(); galleryIndex = (galleryIndex + 1) % 4; updateGalleryImage(); });
+  document.getElementById("gallery-main").addEventListener("click", () => {
+    document.getElementById("gallery-fullscreen-img").src = document.getElementById("gallery-main-img").src;
+    ModalManager.open("gallery-modal");
+  });
+}
+function updateGalleryImage() {
+  const images = [product.image, product.image2, product.image, product.image2];
+  document.getElementById("gallery-main-img").src = images[galleryIndex];
+  document.querySelectorAll("[data-thumb]").forEach((b, i) => (b.style.borderColor = i === galleryIndex ? "var(--accent)" : "var(--border)"));
+}
+
+function wirePDP() {
+  document.getElementById("pdp-qty-plus")?.addEventListener("click", null);
+  const qtyVal = document.getElementById("pdp-qty-value");
+  document.querySelector("[data-pdp-qty-plus]").addEventListener("click", () => { qtyVal.textContent = Number(qtyVal.textContent) + 1; });
+  document.querySelector("[data-pdp-qty-minus]").addEventListener("click", () => { qtyVal.textContent = Math.max(1, Number(qtyVal.textContent) - 1); });
+
+  document.getElementById("pdp-add-cart").addEventListener("click", () => {
+    Cart.add(product.id, Number(qtyVal.textContent));
+    Toast.show(t("addedToCart"), "success", "✓");
+  });
+  document.getElementById("pdp-buy-now").addEventListener("click", () => {
+    Cart.add(product.id, Number(qtyVal.textContent));
+    window.location.href = "checkout.html";
+  });
+  const favBtn = document.getElementById("pdp-fav-btn");
+  function syncFav() {
+    const isFav = Favorites.has(product.id);
+    favBtn.innerHTML = (isFav ? "♥ " : "♡ ") + t("favorites");
+    favBtn.classList.toggle("btn--danger", isFav);
+  }
+  syncFav();
+  favBtn.addEventListener("click", () => { Favorites.toggle(product.id); syncFav(); });
+
+  document.querySelectorAll("[data-color]").forEach((btn) => btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-color]").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedColor = btn.getAttribute("data-color");
+  }));
+  document.querySelectorAll("[data-size]").forEach((btn) => btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-size]").forEach((b) => { b.classList.remove("btn--primary"); b.classList.add("btn--outline"); });
+    btn.classList.remove("btn--outline"); btn.classList.add("btn--primary");
+    selectedSize = btn.getAttribute("data-size");
+  }));
+}
+
+function renderOffers() {
+  const offers = getOffersForProduct(product);
+  document.getElementById("offers-list").innerHTML = offers
+    .map(
+      (o, i) => `
+    <div class="offer-row ${i === 0 ? "selected" : ""}" data-offer="${i}">
+      <div>
+        <div class="offer-seller">${o.seller}</div>
+        <div class="offer-meta">★ ${o.rating} &middot; ${t("sellerLabel")}</div>
+      </div>
+      <div class="offer-delivery">🚚 ${deliveryLabel(o.delivery)}</div>
+      <div class="offer-price">${formatPrice(o.price)}</div>
+      <button class="btn btn--outline btn--sm" data-choose-offer="${i}">${t("chooseSeller")}</button>
+    </div>`
+    )
+    .join("");
+  document.querySelectorAll("[data-choose-offer]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".offer-row").forEach((r) => r.classList.remove("selected"));
+      btn.closest(".offer-row").classList.add("selected");
+      Toast.show(t("chooseSeller") + ": " + offers[Number(btn.getAttribute("data-choose-offer"))].seller, "success", "✓");
+    });
+  });
+}
+
+function renderReviews() {
+  const dist = [78, 14, 5, 2, 1];
+  document.getElementById("review-summary").innerHTML = `
+    <div class="review-score">
+      <div class="big">${product.rating}</div>
+      <div class="stars">★★★★★</div>
+      <div class="text-muted" style="font-size:var(--fs-xs);margin-top:4px">${product.reviews} ${t("reviews")}</div>
+    </div>
+    <div class="review-bars">
+      ${dist.map((pct, i) => `<div class="review-bar-row"><span>${5 - i} ★</span><div class="track"><div class="fill" style="width:${pct}%"></div></div><span>${pct}%</span></div>`).join("")}
+    </div>`;
+  document.getElementById("review-list").innerHTML = mockReviews
+    .map(
+      (r) => `
+    <div class="review-card">
+      <div class="review-avatar">${r.name.charAt(0)}</div>
+      <div style="flex:1">
+        <div class="review-head"><span class="review-name">${r.name}</span><span class="stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</span><span class="review-date">${r.date}</span></div>
+        <div class="review-text">${r.text}</div>
+        ${r.photos ? `<div class="review-photos"><img src="${product.image}" alt=""><img src="${product.image2}" alt=""></div>` : ""}
+        <div class="review-helpful">👍 <button data-helpful>Полезно (${r.helpful})</button></div>
+      </div>
+    </div>`
+    )
+    .join("");
+  document.querySelectorAll("[data-helpful]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      btn.textContent = btn.textContent.replace(/\((\d+)\)/, (_, n) => "(" + (Number(n) + 1) + ")");
+      btn.disabled = true;
+    })
+  );
+}
+
+function renderQuestions() {
+  document.getElementById("questions-list").innerHTML = mockQuestions
+    .map(
+      (q) => `
+    <div class="review-card">
+      <div class="review-avatar">${q.author.charAt(0)}</div>
+      <div style="flex:1">
+        <div class="review-name">${q.author}</div>
+        <div class="review-text" style="margin:4px 0"><b>Q:</b> ${q.q}</div>
+        <div class="review-text" style="color:var(--text)"><b style="color:var(--accent)">${product.seller}:</b> ${q.a}</div>
+      </div>
+    </div>`
+    )
+    .join("");
+}
+
+function renderSpecs() {
+  const rows = [
+    ["Бренд", product.brand],
+    ["Категория", product.category],
+    ["Артикул", "NV-" + (1000 + product.id)],
+    ["Гарантия", "12 месяцев"],
+    ["Страна производства", "Импорт"],
+  ];
+  document.getElementById("specs-table").innerHTML = rows.map(([k, v]) => `<tr><td style="color:var(--text-2);width:240px">${k}</td><td>${v}</td></tr>`).join("");
+}
+
+document.querySelectorAll("[data-tab]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-tab]").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll("[data-tab-panel]").forEach((p) => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelector('[data-tab-panel="' + btn.getAttribute("data-tab") + '"]').classList.add("active");
+  });
+});
+
+document.getElementById("ask-question-btn")?.addEventListener("click", () => ModalManager.open("ask-question-modal"));
+document.getElementById("ask-question-form")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  Toast.show("Вопрос отправлен продавцу", "success", "✓");
+  ModalManager.close("ask-question-modal");
+  e.target.reset();
+});
+
+document.addEventListener("DOMContentLoaded", renderPDP);
+document.addEventListener("langchange", renderPDP);
+
+</script>
+</body>
+</html>

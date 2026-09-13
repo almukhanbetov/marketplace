@@ -1,0 +1,160 @@
+/* ==========================================================================
+   DESIGN TOKENS — Dark Premium (default) + Vivid theme
+   ========================================================================== */
+
+:root {
+  /* ---- Layout ---- */
+  --container-max: 1720px;
+  --container-pad: 32px;
+  --header-h: 64px;
+  --header-h-mobile: 56px;
+  --utility-h: 36px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* ---- Motion ---- */
+  --dur-fast: 140ms;
+  --dur-base: 200ms;
+  --dur-slow: 300ms;
+  --ease: cubic-bezier(.4,0,.2,1);
+  --ease-out: cubic-bezier(0,0,.2,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+
+  /* ---- Type scale ---- */
+  --fs-2xs: .6875rem;
+  --fs-xs: .75rem;
+  --fs-sm: .8125rem;
+  --fs-base: .9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.625rem;
+  --fs-2xl: 2.125rem;
+  --fs-3xl: 2.75rem;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* ---- Z-index ---- */
+  --z-header: 200;
+  --z-megamenu: 210;
+  --z-drawer: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 150;
+
+  /* =========================================================
+     THEME: DARK PREMIUM
+     ========================================================= */
+  --bg: #0a0b0d;
+  --bg-elevated: #0e1013;
+  --surface: #15171b;
+  --surface-2: #1c1f24;
+  --surface-3: #24272e;
+  --border: #2a2d34;
+  --border-strong: #383c45;
+
+  --text: #f3f4f6;
+  --text-2: #9aa0ac;
+  --text-3: #6b7280;
+  --text-inverse: #0a0b0d;
+
+  --accent: #4f8dff;
+  --accent-hover: #6ea0ff;
+  --accent-soft: rgba(79,141,255,.14);
+  --accent-2: #ffb648;
+  --accent-2-soft: rgba(255,182,72,.14);
+
+  --success: #35c98f;
+  --success-soft: rgba(53,201,143,.14);
+  --warning: #ffb648;
+  --danger: #ff5c72;
+  --danger-soft: rgba(255,92,114,.14);
+  --danger-hover: #ff7688;
+
+  --price: #f3f4f6;
+  --price-old: #6b7280;
+  --star: #ffb648;
+
+  --glass-bg: rgba(21,23,27,.72);
+  --glass-border: rgba(255,255,255,.08);
+  --overlay: rgba(4,5,6,.68);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.36), 0 2px 6px rgba(0,0,0,.3);
+  --shadow-lg: 0 20px 48px rgba(0,0,0,.5), 0 4px 12px rgba(0,0,0,.35);
+  --shadow-glow: 0 0 0 1px var(--accent-soft), 0 8px 24px rgba(79,141,255,.18);
+
+  --grad-hero: linear-gradient(135deg, #1a2340 0%, #10131a 55%, #0a0b0d 100%);
+  --grad-accent: linear-gradient(120deg, #4f8dff 0%, #7b6cff 100%);
+  --grad-sale: linear-gradient(120deg, #ff5c72 0%, #ff8a48 100%);
+
+  color-scheme: dark;
+}
+
+/* =========================================================
+   THEME: LIGHT / VIVID — clean white premium + vivid accents
+   (kept the "vivid" attribute name so JS/localStorage/theme
+   toggle logic does not need to change)
+   ========================================================= */
+[data-theme="vivid"] {
+  --bg: #ffffff;
+  --bg-elevated: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f7f7f8;
+  --surface-3: #f3f4f6;
+  --border: #e5e7eb;
+  --border-light: #f0f0f0;
+  --border-strong: #d1d5db;
+
+  --text: #111111;
+  --text-2: #6b7280;
+  --text-3: #78808c;
+  --text-inverse: #ffffff;
+
+  /* vivid accents — deepened just enough to stay accessible as text on white,
+     while still reading as saturated coral/orange/teal/red */
+  --accent: #da2c55;
+  --accent-hover: #b81f44;
+  --accent-soft: rgba(218,44,85,.10);
+  --accent-2: #c2410c;
+  --accent-2-soft: rgba(194,65,12,.12);
+
+  --success: #0b7a5a;
+  --success-soft: rgba(11,122,90,.10);
+  --warning: #b45309;
+  --danger: #dc2626;
+  --danger-soft: rgba(220,38,38,.10);
+  --danger-hover: #b91c1c;
+
+  --price: #111111;
+  --price-old: #9ca3af;
+  --star: #c9930b;
+
+  --glass-bg: rgba(255,255,255,.75);
+  --glass-border: rgba(17,17,17,.08);
+  --overlay: rgba(15,15,15,.5);
+
+  --shadow-sm: 0 1px 2px rgba(16,24,40,.04);
+  --shadow-md: 0 6px 20px rgba(16,24,40,.06), 0 2px 6px rgba(16,24,40,.04);
+  --shadow-lg: 0 16px 40px rgba(16,24,40,.10), 0 4px 12px rgba(16,24,40,.05);
+  --shadow-glow: 0 0 0 1px var(--accent-soft), 0 8px 22px rgba(218,44,85,.18);
+
+  /* promotional-only surfaces (hero banner, CTA/sale gradients) keep their
+     saturated vivid tones — these are accents, not page backgrounds */
+  --grad-hero: linear-gradient(135deg, #4a1c5c 0%, #ba2f5c 55%, #ff7a3d 100%);
+  --grad-accent: linear-gradient(120deg, #ff4d6d 0%, #ff9d3d 100%);
+  --grad-sale: linear-gradient(120deg, #ff2e5a 0%, #ff9433 100%);
+
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

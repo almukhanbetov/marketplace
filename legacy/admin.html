@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Nova Marketplace</title>
+<meta name="description" content="Административная панель Nova Marketplace: пользователи, продавцы, заказы, комиссии.">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="container">
+      <div class="utility-left">
+        <button type="button">📍 <span data-i18n="deliverTo">Алматы</span></button>
+        <a href="#" data-i18n="pickupPoints">Пункты выдачи</a>
+        <a href="#" data-i18n="forBusiness">Для бизнеса</a>
+        <a href="seller-dashboard.html" data-i18n="sellOnMp">Продавать на Nova</a>
+        <a href="#" data-i18n="help">Помощь</a>
+      </div>
+      <div class="utility-right">
+        <div class="lang-switch">
+          <button data-lang-btn="kk">KAZ</button>
+          <button data-lang-btn="ru" class="active">RU</button>
+          <button data-lang-btn="en">ENG</button>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="Сменить тему">☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-mark">N</span>Nova<span>.</span></a>
+
+      <div class="catalog-menu-wrap">
+        <button class="catalog-trigger" data-catalog-trigger aria-expanded="false" aria-haspopup="true">
+          <span class="icon-burger"><span></span><span></span><span></span></span>
+          <span class="label-text" data-i18n="catalog">Каталог</span>
+        </button>
+        <div class="megamenu" data-megamenu></div>
+      </div>
+
+      <div class="search-wrap" data-search-wrap>
+        <form class="search-bar" role="search">
+          <label class="search-cat"><span data-i18n="allCategories">Все категории</span> ▾</label>
+          <input type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Что вы ищете?" autocomplete="off" aria-label="Поиск">
+          <button type="button" class="search-clear" aria-label="Очистить поиск">✕</button>
+          <button type="submit" class="search-submit" aria-label="Искать">🔍</button>
+        </form>
+        <div class="search-panel" data-search-panel></div>
+      </div>
+
+      <nav class="header-actions" aria-label="Действия пользователя">
+        <div style="position:relative">
+          <button class="header-action hide-tablet" data-notif-trigger aria-label="Уведомления">
+            <span class="ha-icon">🔔<span class="ha-count" data-notif-count>0</span></span>
+            <span class="ha-label" data-i18n="notifications">Уведомления</span>
+          </button>
+          <div class="notif-panel" data-notif-panel>
+            <div class="notif-panel-head"><span data-i18n="notifications">Уведомления</span><button data-notif-mark-all data-i18n="markAllRead">Прочитать все</button></div>
+            <div class="notif-list"></div>
+          </div>
+        </div>
+
+        <div style="position:relative">
+          <button class="header-action desktop-only" data-user-trigger aria-label="Профиль">
+            <span class="ha-icon">👤</span>
+            <span class="ha-label" data-i18n="profile">Профиль</span>
+          </button>
+          <div class="user-panel" data-user-panel>
+            <div data-auth-guest>
+              <button data-modal-open="login-modal">🔑 <span data-i18n="login">Войти</span></button>
+              <button data-modal-open="register-modal">📝 <span data-i18n="register">Регистрация</span></button>
+            </div>
+            <div data-auth-user style="display:none">
+              <a href="profile.html">👤 <span data-auth-name>Пользователь</span></a>
+              <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+              <a href="favorites.html" data-i18n="favorites">Избранное</a>
+              <a href="profile.html" data-i18n="settings">Настройки</a>
+              <div class="user-panel-divider"></div>
+              <button data-logout>🚪 <span data-i18n="logout">Выйти</span></button>
+            </div>
+          </div>
+        </div>
+
+        <a href="profile.html" class="header-action hide-tablet">
+          <span class="ha-icon">📦</span>
+          <span class="ha-label" data-i18n="orders">Заказы</span>
+        </a>
+
+        <a href="favorites.html" class="header-action">
+          <span class="ha-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="favorites">Избранное</span>
+        </a>
+
+        <button class="header-action" data-cart-trigger data-cart-icon>
+          <span class="ha-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="cart">Корзина</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+  <div class="megamenu-backdrop" data-megamenu-backdrop></div>
+</header>
+
+<main id="main">
+
+<div class="dash-shell">
+  <aside class="dash-sidebar">
+    <div class="dash-brand"><span class="logo-mark">N</span> Nova <span class="text-muted" style="font-weight:600;font-size:var(--fs-xs)">Admin</span></div>
+    <button class="dash-nav-item active" data-dash-section="overview"><span class="dn-icon">📊</span>Overview</button>
+    <button class="dash-nav-item" data-dash-section="users"><span class="dn-icon">👥</span>Users</button>
+    <button class="dash-nav-item" data-dash-section="sellers"><span class="dn-icon">🏬</span>Sellers</button>
+    <button class="dash-nav-item" data-dash-section="products"><span class="dn-icon">📦</span>Products</button>
+    <button class="dash-nav-item" data-dash-section="categories"><span class="dn-icon">🗂️</span>Categories</button>
+    <button class="dash-nav-item" data-dash-section="orders"><span class="dn-icon">🧾</span>Orders</button>
+    <button class="dash-nav-item" data-dash-section="payments"><span class="dn-icon">💳</span>Payments</button>
+    <button class="dash-nav-item" data-dash-section="commissions"><span class="dn-icon">💠</span>Commissions</button>
+    <button class="dash-nav-item" data-dash-section="payouts"><span class="dn-icon">💸</span>Payouts</button>
+    <button class="dash-nav-item" data-dash-section="returns"><span class="dn-icon">↩️</span>Returns</button>
+    <button class="dash-nav-item" data-dash-section="reviews"><span class="dn-icon">⭐</span>Reviews</button>
+    <button class="dash-nav-item" data-dash-section="promotions"><span class="dn-icon">🎯</span>Promotions</button>
+    <button class="dash-nav-item" data-dash-section="analytics"><span class="dn-icon">📈</span>Analytics</button>
+    <button class="dash-nav-item" data-dash-section="settings"><span class="dn-icon">⚙️</span>Settings</button>
+    <div style="height:1px;background:var(--border);margin:10px 4px"></div>
+    <a href="index.html" class="dash-nav-item"><span class="dn-icon">↩️</span>На витрину Nova</a>
+  </aside>
+
+  <div class="dash-main">
+    <div class="section-head">
+      <div><h2 id="dash-panel-title">Overview</h2><div class="section-sub">Nova Marketplace &middot; администрирование платформы</div></div>
+    </div>
+
+    <div data-dash-panel="overview" class="dash-panel">
+      <div class="stat-grid" style="margin-bottom:22px">
+        <div class="stat-card"><span class="stat-label">GMV (месяц)</span><span class="stat-value">482М ₸</span><span class="stat-delta up">▲ 14%</span></div>
+        <div class="stat-card"><span class="stat-label">Orders</span><span class="stat-value">18 240</span><span class="stat-delta up">▲ 8%</span></div>
+        <div class="stat-card"><span class="stat-label">Customers</span><span class="stat-value">96 400</span><span class="stat-delta up">▲ 5%</span></div>
+        <div class="stat-card"><span class="stat-label">Sellers</span><span class="stat-value">1 280</span><span class="stat-delta up">▲ 3%</span></div>
+        <div class="stat-card"><span class="stat-label">Marketplace Revenue</span><span class="stat-value">48.2М ₸</span><span class="stat-delta up">▲ 11%</span></div>
+        <div class="stat-card"><span class="stat-label">Average Order Value</span><span class="stat-value">26 400 ₸</span><span class="stat-delta down">▼ 1%</span></div>
+        <div class="stat-card"><span class="stat-label">Conversion Rate</span><span class="stat-value">3.4%</span><span class="stat-delta up">▲ 0.3%</span></div>
+        <div class="stat-card"><span class="stat-label">Return Rate</span><span class="stat-value">1.8%</span><span class="stat-delta down">▼ 0.2%</span></div>
+      </div>
+      <div class="chart-card">
+        <h4 style="font-size:var(--fs-sm);font-weight:700;margin-bottom:16px">GMV по месяцам</h4>
+        <div class="bar-chart" id="gmv-chart"></div>
+      </div>
+    </div>
+
+    <div data-dash-panel="users" class="dash-panel" style="display:none">
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Пользователь</th><th>Email</th><th>Заказов</th><th>Регистрация</th><th>Статус</th></tr></thead>
+        <tbody id="users-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div data-dash-panel="sellers" class="dash-panel" style="display:none">
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Продавец</th><th>Рейтинг</th><th>Продажи</th><th>На платформе</th><th>Статус</th><th></th></tr></thead>
+        <tbody id="sellers-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div data-dash-panel="products" class="dash-panel" style="display:none">
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Фото</th><th>Товар</th><th>Категория</th><th>Продавец</th><th>Цена</th><th>Статус</th></tr></thead>
+        <tbody id="admin-products-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div data-dash-panel="categories" class="dash-panel" style="display:none">
+      <div class="stat-grid" id="categories-grid"></div>
+    </div>
+
+    <div data-dash-panel="orders" class="dash-panel" style="display:none">
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Order</th><th>Customer</th><th>Seller</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+        <tbody id="admin-orders-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div data-dash-panel="payments" class="dash-panel" style="display:none">
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Транзакция</th><th>Метод</th><th>Сумма</th><th>Статус</th><th>Дата</th></tr></thead>
+        <tbody id="payments-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div data-dash-panel="commissions" class="dash-panel" style="display:none">
+      <div class="commission-widget" style="max-width:480px">
+        <h4 style="font-size:var(--fs-sm);font-weight:700;margin-bottom:8px">Комиссия по категориям</h4>
+        <div class="commission-row"><span>Электроника</span><span>8%</span></div>
+        <div class="commission-row"><span>Одежда и обувь</span><span>15%</span></div>
+        <div class="commission-row"><span>Красота</span><span>12%</span></div>
+        <div class="commission-row"><span>Дом</span><span>10%</span></div>
+        <div class="commission-row"><span>Средняя комиссия</span><span>11.2%</span></div>
+      </div>
+    </div>
+
+    <div data-dash-panel="payouts" class="dash-panel" style="display:none">
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Продавец</th><th>Период</th><th>Сумма</th><th>Статус</th></tr></thead>
+        <tbody id="payouts-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div data-dash-panel="returns" class="dash-panel" style="display:none">
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Заказ</th><th>Товар</th><th>Причина</th><th>Статус</th></tr></thead>
+        <tbody id="returns-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div data-dash-panel="reviews" class="dash-panel" style="display:none" id="admin-reviews"></div>
+
+    <div data-dash-panel="promotions" class="dash-panel" style="display:none">
+      <div class="hero-promos" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div class="promo-card promo-card--a"><b>Главный баннер</b><span>Активна до 02.09.2026</span></div>
+        <div class="promo-card promo-card--b"><b>Flash Sale недели</b><span>Активна, 42 товара</span></div>
+        <div class="promo-card promo-card--a"><b>Скидки для новых</b><span>Черновик</span></div>
+      </div>
+    </div>
+
+    <div data-dash-panel="analytics" class="dash-panel" style="display:none">
+      <div class="chart-card">
+        <h4 style="font-size:var(--fs-sm);font-weight:700;margin-bottom:16px">Заказы по категориям</h4>
+        <div class="bar-chart" id="admin-analytics-chart"></div>
+      </div>
+    </div>
+
+    <div data-dash-panel="settings" class="dash-panel" style="display:none">
+      <div class="info-card" style="max-width:520px">
+        <div class="field" style="margin-bottom:14px"><label>Название платформы</label><input value="Nova Marketplace"></div>
+        <div class="field" style="margin-bottom:14px"><label>Комиссия по умолчанию</label><input value="10%"></div>
+        <div class="field" style="margin-bottom:14px"><label>Email поддержки</label><input value="support@nova.kz"></div>
+        <button class="btn btn--primary">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Nova</h5>
+        <a href="#">О компании</a>
+        <a href="#">Карьера</a>
+        <a href="seller-dashboard.html">Продавать на Nova</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="catalog">Каталог</h5>
+        <a href="catalog.html?cat=electronics">Электроника</a>
+        <a href="catalog.html?cat=fashion">Одежда</a>
+        <a href="catalog.html?cat=home">Дом</a>
+        <a href="catalog.html?cat=beauty">Красота</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="help">Помощь</h5>
+        <a href="#">Доставка и оплата</a>
+        <a href="#">Возврат товара</a>
+        <a href="#">Условия использования</a>
+        <a href="#">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Покупателям</h5>
+        <a href="cart.html" data-i18n="cart">Корзина</a>
+        <a href="favorites.html" data-i18n="favorites">Избранное</a>
+        <a href="compare.html" data-i18n="compare">Сравнить</a>
+        <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+      </div>
+      <div class="footer-col">
+        <h5>Продавцам</h5>
+        <a href="seller.html">Магазин TechStore</a>
+        <a href="seller-dashboard.html">Кабинет продавца</a>
+        <a href="seller-dashboard.html">Комиссия и тарифы</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nova Marketplace. Все права защищены.</span>
+      <span>Frontend prototype · v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-nav" aria-label="Мобильная навигация">
+  <a href="index.html" class=""><span class="mn-icon">🏠</span><span data-i18n="home">Главная</span></a>
+  <a href="catalog.html" class=""><span class="mn-icon">📂</span><span data-i18n="catalog">Каталог</span></a>
+  <a href="favorites.html" class=""><span class="mn-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span><span data-i18n="favorites">Избранное</span></a>
+  <a href="cart.html" class=""><span class="mn-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span><span data-i18n="cart">Корзина</span></a>
+  <a href="profile.html" class=""><span class="mn-icon">👤</span><span data-i18n="profile">Профиль</span></a>
+</nav>
+
+<div class="drawer-backdrop" data-cart-backdrop></div>
+<aside class="drawer" data-cart-drawer aria-label="Корзина">
+  <div class="drawer-head">
+    <h3 data-i18n="yourCart">Корзина</h3>
+    <button class="modal-close" data-cart-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="drawer-body" data-cart-drawer-body></div>
+  <div class="drawer-summary" data-cart-drawer-summary></div>
+</aside>
+
+<div class="modal-backdrop" id="login-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal-head"><h3 id="login-title" data-i18n="login">Войти</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" data-login-form>
+      <div class="field"><label for="login-name" data-i18n="name">Имя</label><input id="login-name" name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label for="login-email">Email</label><input id="login-email" name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="login-pass">Пароль</label><input id="login-pass" type="password" placeholder="••••••••" required></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="login">Войти</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="register-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="register-title">
+    <div class="modal-head"><h3 id="register-title" data-i18n="register">Регистрация</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" onsubmit="event.preventDefault(); Auth.login(this.name.value || 'Новый пользователь', this.email.value); ModalManager.close('register-modal'); Toast.show('Аккаунт создан','success','✓');">
+      <div class="field"><label data-i18n="name">Имя</label><input name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label>Телефон</label><input name="phone" type="tel" placeholder="+7 700 000 00 00"></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="register">Регистрация</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="quickview-modal">
+  <div class="modal modal--lg" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+    <div class="modal-head"><h3 id="qv-title" data-i18n="quickView">Быстрый просмотр</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+
+<script src="js/data.js"></script>
+<script src="js/translations.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/language.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+
+const adminSectionTitles = {
+  overview: "Overview", users: "Users", sellers: "Sellers", products: "Products", categories: "Categories",
+  orders: "Orders", payments: "Payments", commissions: "Commissions", payouts: "Payouts", returns: "Returns",
+  reviews: "Reviews", promotions: "Promotions", analytics: "Analytics", settings: "Settings",
+};
+document.querySelectorAll("[data-dash-section]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-dash-section]").forEach((b) => b.classList.toggle("active", b === btn));
+    document.querySelectorAll("[data-dash-panel]").forEach((p) => (p.style.display = "none"));
+    const target = document.querySelector('[data-dash-panel="' + btn.getAttribute("data-dash-section") + '"]');
+    if (target) target.style.display = "";
+    document.getElementById("dash-panel-title").textContent = adminSectionTitles[btn.getAttribute("data-dash-section")] || "Overview";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+
+function renderBarChart(sel, data) {
+  const el = document.querySelector(sel);
+  if (!el) return;
+  const max = Math.max(...data.map((d) => d.value));
+  el.innerHTML = data.map((d) => `<div class="bar-col"><div class="bar" style="height:${(d.value / max) * 100}%"></div><span class="bar-label">${d.label}</span></div>`).join("");
+}
+
+function renderUsers() {
+  const names = ["Динара Ахметова", "Ерлан Смагулов", "Тимур Ким", "Расул Абенов", "Сара Ли", "Айгерим Нурланова", "Данияр Каримов"];
+  document.getElementById("users-tbody").innerHTML = names
+    .map((n, i) => `<tr><td>${n}</td><td>${n.split(" ")[0].toLowerCase()}@example.com</td><td>${3 + i * 2}</td><td>202${4 + (i % 2)}-0${(i % 9) + 1}-1${i}</td><td><span class="status-pill status-pill--done">Активен</span></td></tr>`)
+    .join("");
+}
+
+function renderSellersTable() {
+  document.getElementById("sellers-tbody").innerHTML = sellers
+    .map((s) => `<tr><td>${s.name}</td><td>★ ${s.rating}</td><td>${s.sales.toLocaleString("ru-RU")}</td><td>${s.years} года</td><td><span class="status-pill status-pill--done">Активен</span></td><td class="row-actions"><button aria-label="Просмотр"><a href="seller.html?id=${s.id}" style="color:inherit">👁</a></button></td></tr>`)
+    .join("");
+}
+
+function renderAdminProducts() {
+  document.getElementById("admin-products-tbody").innerHTML = products
+    .slice(0, 20)
+    .map((p) => `<tr><td><img class="dt-thumb" src="${p.image}"></td><td>${p.title}</td><td>${p.category}</td><td>${p.seller}</td><td>${formatPrice(p.price)}</td><td><span class="status-pill status-pill--done">Опубликован</span></td></tr>`)
+    .join("");
+}
+
+function renderCategoriesGrid() {
+  const lang = LanguageManager.get();
+  document.getElementById("categories-grid").innerHTML = categories
+    .map((c) => `<div class="stat-card"><span class="stat-label">${c.icon} ${c.label[lang]}</span><span class="stat-value">${products.filter((p) => p.category === c.id).length}</span><span class="text-muted" style="font-size:var(--fs-2xs)">товаров</span></div>`)
+    .join("");
+}
+
+function renderAdminOrders() {
+  const statuses = ["new", "confirmed", "shipped", "delivered", "cancelled"];
+  const cls = { new: "status-pill--new", confirmed: "status-pill--progress", shipped: "status-pill--progress", delivered: "status-pill--done", cancelled: "status-pill--cancel" };
+  const labels = { new: "Новый", confirmed: "Подтверждён", shipped: "В пути", delivered: "Доставлен", cancelled: "Отменён" };
+  document.getElementById("admin-orders-tbody").innerHTML = Array.from({ length: 10 })
+    .map((_, i) => {
+      const s = statuses[i % statuses.length];
+      return `<tr><td>MK-2026-${20000 + i}</td><td>Клиент ${i + 1}</td><td>${sellers[i % sellers.length].name}</td><td>${formatPrice(15000 + i * 12000)}</td><td><span class="status-pill ${cls[s]}">${labels[s]}</span></td><td>2026-08-${10 + i}</td></tr>`;
+    })
+    .join("");
+}
+
+function renderPayments() {
+  const methods = ["Карта", "Kaspi", "Apple Pay", "Google Pay"];
+  document.getElementById("payments-tbody").innerHTML = Array.from({ length: 8 })
+    .map((_, i) => `<tr><td>TXN-${90000 + i}</td><td>${methods[i % methods.length]}</td><td>${formatPrice(8000 + i * 15000)}</td><td><span class="status-pill status-pill--done">Успешно</span></td><td>2026-08-${5 + i}</td></tr>`)
+    .join("");
+}
+
+function renderPayouts() {
+  document.getElementById("payouts-tbody").innerHTML = sellers
+    .map((s, i) => `<tr><td>${s.name}</td><td>Август 2026</td><td>${formatPrice(800000 + i * 210000)}</td><td><span class="status-pill ${i % 3 === 0 ? "status-pill--new" : "status-pill--done"}">${i % 3 === 0 ? "Ожидает" : "Выплачено"}</span></td></tr>`)
+    .join("");
+}
+
+function renderReturns() {
+  const reasons = ["Не подошёл размер", "Брак", "Передумал", "Не соответствует описанию"];
+  document.getElementById("returns-tbody").innerHTML = Array.from({ length: 6 })
+    .map((_, i) => `<tr><td>MK-2026-${30000 + i}</td><td>${products[i * 3].title}</td><td>${reasons[i % reasons.length]}</td><td><span class="status-pill ${i % 2 ? "status-pill--done" : "status-pill--new"}">${i % 2 ? "Одобрен" : "На рассмотрении"}</span></td></tr>`)
+    .join("");
+}
+
+function renderAdminReviews() {
+  document.getElementById("admin-reviews").innerHTML = [
+    { name: "Мадина Т.", text: "Отличный сервис и быстрая доставка по всей стране.", rating: 5 },
+    { name: "Асхат Б.", text: "Товар пришёл с задержкой, но поддержка быстро помогла.", rating: 4 },
+  ]
+    .map((r) => `<div class="review-card"><div class="review-avatar">${r.name.charAt(0)}</div><div><div class="review-head"><span class="review-name">${r.name}</span><span class="stars">${"★".repeat(r.rating)}</span></div><div class="review-text">${r.text}</div></div></div>`)
+    .join("");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderBarChart("#gmv-chart", [
+    { label: "Мар", value: 340 }, { label: "Апр", value: 365 }, { label: "Май", value: 390 },
+    { label: "Июн", value: 410 }, { label: "Июл", value: 445 }, { label: "Авг", value: 482 },
+  ]);
+  renderBarChart("#admin-analytics-chart", categories.slice(0, 6).map((c) => ({ label: c.icon, value: products.filter((p) => p.category === c.id).length || 1 })));
+  renderUsers();
+  renderSellersTable();
+  renderAdminProducts();
+  renderCategoriesGrid();
+  renderAdminOrders();
+  renderPayments();
+  renderPayouts();
+  renderReturns();
+  renderAdminReviews();
+});
+document.addEventListener("langchange", renderCategoriesGrid);
+
+</script>
+</body>
+</html>

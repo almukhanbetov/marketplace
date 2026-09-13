@@ -1,0 +1,21 @@
+# Copy this file to android/key.properties (same directory) and fill in
+# your real values. android/key.properties is gitignored and must NEVER
+# be committed — this .example file is the only one tracked by git.
+#
+# Generate the keystore first (choose and remember your own passwords —
+# nothing in this project can do that for you):
+#
+#   keytool -genkeypair \
+#     -v \
+#     -keystore ~/nova-release-key.jks \
+#     -keyalg RSA \
+#     -keysize 2048 \
+#     -validity 10000 \
+#     -alias nova
+#
+# Then create android/key.properties with:
+
+storePassword=YOUR_STORE_PASSWORD
+keyPassword=YOUR_KEY_PASSWORD
+keyAlias=nova
+storeFile=/absolute/path/to/nova-release-key.jks

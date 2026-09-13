@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сравнение товаров — Nova Marketplace</title>
+<meta name="description" content="Сравнение характеристик товаров Nova Marketplace.">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="container">
+      <div class="utility-left">
+        <button type="button">📍 <span data-i18n="deliverTo">Алматы</span></button>
+        <a href="#" data-i18n="pickupPoints">Пункты выдачи</a>
+        <a href="#" data-i18n="forBusiness">Для бизнеса</a>
+        <a href="seller-dashboard.html" data-i18n="sellOnMp">Продавать на Nova</a>
+        <a href="#" data-i18n="help">Помощь</a>
+      </div>
+      <div class="utility-right">
+        <div class="lang-switch">
+          <button data-lang-btn="kk">KAZ</button>
+          <button data-lang-btn="ru" class="active">RU</button>
+          <button data-lang-btn="en">ENG</button>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="Сменить тему">☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-mark">N</span>Nova<span>.</span></a>
+
+      <div class="catalog-menu-wrap">
+        <button class="catalog-trigger" data-catalog-trigger aria-expanded="false" aria-haspopup="true">
+          <span class="icon-burger"><span></span><span></span><span></span></span>
+          <span class="label-text" data-i18n="catalog">Каталог</span>
+        </button>
+        <div class="megamenu" data-megamenu></div>
+      </div>
+
+      <div class="search-wrap" data-search-wrap>
+        <form class="search-bar" role="search">
+          <label class="search-cat"><span data-i18n="allCategories">Все категории</span> ▾</label>
+          <input type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Что вы ищете?" autocomplete="off" aria-label="Поиск">
+          <button type="button" class="search-clear" aria-label="Очистить поиск">✕</button>
+          <button type="submit" class="search-submit" aria-label="Искать">🔍</button>
+        </form>
+        <div class="search-panel" data-search-panel></div>
+      </div>
+
+      <nav class="header-actions" aria-label="Действия пользователя">
+        <div style="position:relative">
+          <button class="header-action hide-tablet" data-notif-trigger aria-label="Уведомления">
+            <span class="ha-icon">🔔<span class="ha-count" data-notif-count>0</span></span>
+            <span class="ha-label" data-i18n="notifications">Уведомления</span>
+          </button>
+          <div class="notif-panel" data-notif-panel>
+            <div class="notif-panel-head"><span data-i18n="notifications">Уведомления</span><button data-notif-mark-all data-i18n="markAllRead">Прочитать все</button></div>
+            <div class="notif-list"></div>
+          </div>
+        </div>
+
+        <div style="position:relative">
+          <button class="header-action desktop-only" data-user-trigger aria-label="Профиль">
+            <span class="ha-icon">👤</span>
+            <span class="ha-label" data-i18n="profile">Профиль</span>
+          </button>
+          <div class="user-panel" data-user-panel>
+            <div data-auth-guest>
+              <button data-modal-open="login-modal">🔑 <span data-i18n="login">Войти</span></button>
+              <button data-modal-open="register-modal">📝 <span data-i18n="register">Регистрация</span></button>
+            </div>
+            <div data-auth-user style="display:none">
+              <a href="profile.html">👤 <span data-auth-name>Пользователь</span></a>
+              <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+              <a href="favorites.html" data-i18n="favorites">Избранное</a>
+              <a href="profile.html" data-i18n="settings">Настройки</a>
+              <div class="user-panel-divider"></div>
+              <button data-logout>🚪 <span data-i18n="logout">Выйти</span></button>
+            </div>
+          </div>
+        </div>
+
+        <a href="profile.html" class="header-action hide-tablet">
+          <span class="ha-icon">📦</span>
+          <span class="ha-label" data-i18n="orders">Заказы</span>
+        </a>
+
+        <a href="favorites.html" class="header-action">
+          <span class="ha-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="favorites">Избранное</span>
+        </a>
+
+        <button class="header-action" data-cart-trigger data-cart-icon>
+          <span class="ha-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="cart">Корзина</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+  <div class="megamenu-backdrop" data-megamenu-backdrop></div>
+</header>
+
+<main id="main">
+
+<div class="container page-section--tight">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="index.html" data-i18n="home">Главная</a><span aria-hidden="true">/</span>
+    <span data-i18n="compare">Сравнить</span>
+  </nav>
+  <h1 style="font-size:var(--fs-xl);font-weight:800;margin-bottom:20px" data-i18n="compare">Сравнить</h1>
+  <div id="compare-root"></div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Nova</h5>
+        <a href="#">О компании</a>
+        <a href="#">Карьера</a>
+        <a href="seller-dashboard.html">Продавать на Nova</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="catalog">Каталог</h5>
+        <a href="catalog.html?cat=electronics">Электроника</a>
+        <a href="catalog.html?cat=fashion">Одежда</a>
+        <a href="catalog.html?cat=home">Дом</a>
+        <a href="catalog.html?cat=beauty">Красота</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="help">Помощь</h5>
+        <a href="#">Доставка и оплата</a>
+        <a href="#">Возврат товара</a>
+        <a href="#">Условия использования</a>
+        <a href="#">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Покупателям</h5>
+        <a href="cart.html" data-i18n="cart">Корзина</a>
+        <a href="favorites.html" data-i18n="favorites">Избранное</a>
+        <a href="compare.html" data-i18n="compare">Сравнить</a>
+        <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+      </div>
+      <div class="footer-col">
+        <h5>Продавцам</h5>
+        <a href="seller.html">Магазин TechStore</a>
+        <a href="seller-dashboard.html">Кабинет продавца</a>
+        <a href="seller-dashboard.html">Комиссия и тарифы</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nova Marketplace. Все права защищены.</span>
+      <span>Frontend prototype · v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-nav" aria-label="Мобильная навигация">
+  <a href="index.html" class=""><span class="mn-icon">🏠</span><span data-i18n="home">Главная</span></a>
+  <a href="catalog.html" class=""><span class="mn-icon">📂</span><span data-i18n="catalog">Каталог</span></a>
+  <a href="favorites.html" class=""><span class="mn-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span><span data-i18n="favorites">Избранное</span></a>
+  <a href="cart.html" class=""><span class="mn-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span><span data-i18n="cart">Корзина</span></a>
+  <a href="profile.html" class=""><span class="mn-icon">👤</span><span data-i18n="profile">Профиль</span></a>
+</nav>
+
+<div class="drawer-backdrop" data-cart-backdrop></div>
+<aside class="drawer" data-cart-drawer aria-label="Корзина">
+  <div class="drawer-head">
+    <h3 data-i18n="yourCart">Корзина</h3>
+    <button class="modal-close" data-cart-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="drawer-body" data-cart-drawer-body></div>
+  <div class="drawer-summary" data-cart-drawer-summary></div>
+</aside>
+
+<div class="modal-backdrop" id="login-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal-head"><h3 id="login-title" data-i18n="login">Войти</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" data-login-form>
+      <div class="field"><label for="login-name" data-i18n="name">Имя</label><input id="login-name" name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label for="login-email">Email</label><input id="login-email" name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="login-pass">Пароль</label><input id="login-pass" type="password" placeholder="••••••••" required></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="login">Войти</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="register-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="register-title">
+    <div class="modal-head"><h3 id="register-title" data-i18n="register">Регистрация</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" onsubmit="event.preventDefault(); Auth.login(this.name.value || 'Новый пользователь', this.email.value); ModalManager.close('register-modal'); Toast.show('Аккаунт создан','success','✓');">
+      <div class="field"><label data-i18n="name">Имя</label><input name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label>Телефон</label><input name="phone" type="tel" placeholder="+7 700 000 00 00"></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="register">Регистрация</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="quickview-modal">
+  <div class="modal modal--lg" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+    <div class="modal-head"><h3 id="qv-title" data-i18n="quickView">Быстрый просмотр</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+
+<script src="js/data.js"></script>
+<script src="js/translations.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/language.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+
+function renderComparePage() {
+  const ids = JSON.parse(localStorage.getItem("mp_compare") || "[]");
+  const list = ids.map((id) => getProductById(id)).filter(Boolean);
+  const root = document.getElementById("compare-root");
+
+  if (!list.length) {
+    root.innerHTML = `<div class="empty-state">
+      <div class="empty-state__icon">⚖️</div>
+      <h3>Список сравнения пуст</h3>
+      <p>Добавьте товары к сравнению на карточке товара.</p>
+      <a href="catalog.html" class="btn btn--primary btn--lg" style="margin-top:10px">${t("startShopping")}</a>
+    </div>`;
+    return;
+  }
+
+  const rows = [
+    ["Изображение", (p) => `<img src="${p.image}" style="width:80px;height:80px;object-fit:cover;border-radius:10px;margin:0 auto">`],
+    ["Бренд", (p) => p.brand],
+    [t("price"), (p) => `<b style="font-size:var(--fs-md)">${formatPrice(p.price)}</b>`],
+    ["Скидка", (p) => `−${p.discount}%`],
+    [t("rating"), (p) => `★ ${p.rating} (${p.reviews})`],
+    [t("seller"), (p) => p.seller],
+    [t("delivery"), (p) => deliveryLabel(p.delivery)],
+    ["В наличии", (p) => p.stock + " шт."],
+    ["", (p) => `<button class="btn btn--primary btn--sm" data-cart-toggle="${p.id}">${t("addToCart")}</button>`],
+    ["", (p) => `<button class="btn btn--ghost btn--sm" data-remove-compare="${p.id}">✕ Убрать</button>`],
+  ];
+
+  root.innerHTML = `<div class="data-table-wrap"><table class="data-table compare-table">
+    <tr><th>Товар</th>${list.map((p) => `<th><a href="product.html?id=${p.id}" style="font-weight:700">${p.title}</a></th>`).join("")}</tr>
+    ${rows.map(([label, fn]) => `<tr><td>${label}</td>${list.map((p) => `<td>${fn(p)}</td>`).join("")}</tr>`).join("")}
+  </table></div>`;
+
+  root.querySelectorAll("[data-remove-compare]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const id = Number(btn.getAttribute("data-remove-compare"));
+      const updated = ids.filter((x) => x !== id);
+      localStorage.setItem("mp_compare", JSON.stringify(updated));
+      renderComparePage();
+    })
+  );
+}
+
+document.addEventListener("DOMContentLoaded", renderComparePage);
+document.addEventListener("langchange", renderComparePage);
+document.addEventListener("cartchange", renderComparePage);
+
+</script>
+</body>
+</html>

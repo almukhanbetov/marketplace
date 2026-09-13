@@ -1,0 +1,125 @@
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* ---- Ultrawide boost ---- */
+@media (min-width: 2200px) {
+  :root { --container-max: 2000px; }
+  .grid-products { grid-template-columns: repeat(8, 1fr); }
+  .grid-categories { grid-template-columns: repeat(12, 1fr); }
+}
+
+@media (min-width: 1800px) and (max-width: 2199px) {
+  .grid-products { grid-template-columns: repeat(7, 1fr); }
+}
+
+/* ---- Laptop ---- */
+@media (max-width: 1366px) {
+  :root { --container-pad: 24px; }
+  .grid-products { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* ---- Small laptop / large tablet ---- */
+@media (max-width: 1180px) {
+  .hero-grid { grid-template-columns: 1fr 300px; }
+  .layout-with-sidebar { grid-template-columns: 240px 1fr; }
+  .grid-categories { grid-template-columns: repeat(6, 1fr); }
+  #pdp-root { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* ---- Tablet ---- */
+.tablet-only { display: none !important; }
+
+@media (max-width: 1024px) {
+  .tablet-only { display: inline-flex !important; }
+  .grid-products { grid-template-columns: repeat(4, 1fr); }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-promos { flex-direction: row; }
+  .hero-banner { min-height: 320px; }
+  .layout-with-sidebar { grid-template-columns: 1fr; }
+  .sidebar-card.desktop-only { display: none; }
+  .dash-shell { grid-template-columns: 1fr; }
+  .dash-sidebar { display: none; }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .megamenu { width: 94vw; }
+  .quickview-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Header collapses ---- */
+@media (max-width: 900px) {
+  .utility-bar .utility-left { display: none; }
+  .header-action.hide-tablet { display: none; }
+  .catalog-trigger span.label-text { display: none; }
+  .search-cat { display: none; }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  :root { --container-pad: 16px; --header-h: var(--header-h-mobile); }
+
+  body { padding-bottom: 64px; }
+  .mobile-nav { display: flex; }
+  .header-action.desktop-only { display: none; }
+  .utility-bar { display: none; }
+
+  .header-main .container { flex-wrap: wrap; gap: 10px; }
+  .logo { order: 1; }
+  .header-actions { order: 2; margin-left: auto; }
+  .catalog-menu-wrap { order: 3; }
+  .catalog-trigger { padding: 10px; }
+  .catalog-trigger span.label-text { display: none; }
+  .search-wrap { order: 4; flex-basis: 100%; }
+
+  .grid-products { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .grid-categories { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+  .hero-slide { padding: 28px 24px; }
+  .hero-slide h1 { font-size: var(--fs-2xl); }
+  .hero-promos { flex-direction: column; }
+  .hero-dots { left: 24px; }
+
+  .section-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+  .flash-head { gap: 12px; }
+  .flash-cta { margin-left: 0; width: 100%; }
+
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .drawer { width: 100vw; }
+  #pdp-root { grid-template-columns: 1fr !important; }
+
+  .modal { max-width: 100%; margin: 0 8px; }
+  .quickview-grid { grid-template-columns: 1fr; }
+
+  .review-summary { gap: 20px; }
+
+  .dash-main { padding: 18px 16px 80px; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .megamenu { width: 100vw; left: -16px; border-radius: 0; flex-direction: column; max-height: 80vh; overflow-y: auto; }
+  .megamenu-cats { width: 100%; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+  .megamenu-body { max-height: none; }
+  .megamenu-grid { grid-template-columns: 1fr 1fr; }
+  .megamenu-promo { grid-template-columns: 1fr; }
+
+  .checkout-step-nav { flex-wrap: wrap; }
+  .checkout-step span.step-label { display: none; }
+
+  .carousel-nav { display: none; }
+  .hero-arrow { display: none; }
+}
+
+@media (max-width: 430px) {
+  .grid-categories { grid-template-columns: repeat(3, 1fr); }
+  .megamenu-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .hero-slide h1 { font-size: var(--fs-xl); }
+}
+
+@media (max-width: 360px) {
+  :root { --container-pad: 12px; }
+  .grid-products { gap: 10px; }
+  .header-action { min-width: 40px; padding: 6px; }
+  .header-action span.ha-label { display: none; }
+}

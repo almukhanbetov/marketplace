@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оформление заказа — Nova Marketplace</title>
+<meta name="description" content="Оформление заказа: получатель, доставка, оплата, проверка заказа.">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="container">
+      <div class="utility-left">
+        <button type="button">📍 <span data-i18n="deliverTo">Алматы</span></button>
+        <a href="#" data-i18n="pickupPoints">Пункты выдачи</a>
+        <a href="#" data-i18n="forBusiness">Для бизнеса</a>
+        <a href="seller-dashboard.html" data-i18n="sellOnMp">Продавать на Nova</a>
+        <a href="#" data-i18n="help">Помощь</a>
+      </div>
+      <div class="utility-right">
+        <div class="lang-switch">
+          <button data-lang-btn="kk">KAZ</button>
+          <button data-lang-btn="ru" class="active">RU</button>
+          <button data-lang-btn="en">ENG</button>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="Сменить тему">☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-mark">N</span>Nova<span>.</span></a>
+
+      <div class="catalog-menu-wrap">
+        <button class="catalog-trigger" data-catalog-trigger aria-expanded="false" aria-haspopup="true">
+          <span class="icon-burger"><span></span><span></span><span></span></span>
+          <span class="label-text" data-i18n="catalog">Каталог</span>
+        </button>
+        <div class="megamenu" data-megamenu></div>
+      </div>
+
+      <div class="search-wrap" data-search-wrap>
+        <form class="search-bar" role="search">
+          <label class="search-cat"><span data-i18n="allCategories">Все категории</span> ▾</label>
+          <input type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Что вы ищете?" autocomplete="off" aria-label="Поиск">
+          <button type="button" class="search-clear" aria-label="Очистить поиск">✕</button>
+          <button type="submit" class="search-submit" aria-label="Искать">🔍</button>
+        </form>
+        <div class="search-panel" data-search-panel></div>
+      </div>
+
+      <nav class="header-actions" aria-label="Действия пользователя">
+        <div style="position:relative">
+          <button class="header-action hide-tablet" data-notif-trigger aria-label="Уведомления">
+            <span class="ha-icon">🔔<span class="ha-count" data-notif-count>0</span></span>
+            <span class="ha-label" data-i18n="notifications">Уведомления</span>
+          </button>
+          <div class="notif-panel" data-notif-panel>
+            <div class="notif-panel-head"><span data-i18n="notifications">Уведомления</span><button data-notif-mark-all data-i18n="markAllRead">Прочитать все</button></div>
+            <div class="notif-list"></div>
+          </div>
+        </div>
+
+        <div style="position:relative">
+          <button class="header-action desktop-only" data-user-trigger aria-label="Профиль">
+            <span class="ha-icon">👤</span>
+            <span class="ha-label" data-i18n="profile">Профиль</span>
+          </button>
+          <div class="user-panel" data-user-panel>
+            <div data-auth-guest>
+              <button data-modal-open="login-modal">🔑 <span data-i18n="login">Войти</span></button>
+              <button data-modal-open="register-modal">📝 <span data-i18n="register">Регистрация</span></button>
+            </div>
+            <div data-auth-user style="display:none">
+              <a href="profile.html">👤 <span data-auth-name>Пользователь</span></a>
+              <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+              <a href="favorites.html" data-i18n="favorites">Избранное</a>
+              <a href="profile.html" data-i18n="settings">Настройки</a>
+              <div class="user-panel-divider"></div>
+              <button data-logout>🚪 <span data-i18n="logout">Выйти</span></button>
+            </div>
+          </div>
+        </div>
+
+        <a href="profile.html" class="header-action hide-tablet">
+          <span class="ha-icon">📦</span>
+          <span class="ha-label" data-i18n="orders">Заказы</span>
+        </a>
+
+        <a href="favorites.html" class="header-action">
+          <span class="ha-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="favorites">Избранное</span>
+        </a>
+
+        <button class="header-action" data-cart-trigger data-cart-icon>
+          <span class="ha-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span>
+          <span class="ha-label" data-i18n="cart">Корзина</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+  <div class="megamenu-backdrop" data-megamenu-backdrop></div>
+</header>
+
+<main id="main">
+
+<div class="container page-section--tight">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="index.html" data-i18n="home">Главная</a><span aria-hidden="true">/</span>
+    <a href="cart.html" data-i18n="cart">Корзина</a><span aria-hidden="true">/</span>
+    <span data-i18n="checkout">Оформление</span>
+  </nav>
+
+  <div class="checkout-step-nav" id="checkout-steps">
+    <div class="checkout-step active" data-step-indicator="1"><span class="num">1</span><span class="step-label" data-i18n="recipient">Получатель</span></div>
+    <div class="checkout-step-sep"></div>
+    <div class="checkout-step" data-step-indicator="2"><span class="num">2</span><span class="step-label" data-i18n="deliveryMethod">Доставка</span></div>
+    <div class="checkout-step-sep"></div>
+    <div class="checkout-step" data-step-indicator="3"><span class="num">3</span><span class="step-label" data-i18n="payment">Оплата</span></div>
+    <div class="checkout-step-sep"></div>
+    <div class="checkout-step" data-step-indicator="4"><span class="num">4</span><span class="step-label" data-i18n="reviewOrder">Проверка</span></div>
+  </div>
+
+  <div class="layout-with-sidebar">
+    <div>
+      <div class="info-card checkout-panel" data-step-panel="1">
+        <h3 style="font-size:var(--fs-md);font-weight:800;margin-bottom:16px" data-i18n="recipient">Получатель</h3>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="field"><label data-i18n="name">Имя</label><input id="co-name" placeholder="Айгерим Ким" value="Айгерим Ким"></div>
+          <div class="field"><label data-i18n="phone">Телефон</label><input id="co-phone" placeholder="+7 700 000 00 00" value="+7 701 234 56 78"></div>
+          <div class="field"><label>Email</label><input id="co-email" type="email" placeholder="you@example.com" value="aigerim@example.com"></div>
+        </div>
+        <button class="btn btn--primary" style="margin-top:20px" data-next-step="2">Продолжить →</button>
+      </div>
+
+      <div class="info-card checkout-panel" data-step-panel="2" style="display:none">
+        <h3 style="font-size:var(--fs-md);font-weight:800;margin-bottom:16px" data-i18n="deliveryMethod">Доставка</h3>
+        <div class="pay-option selected"><input type="radio" name="delivery-method" checked><span class="po-icon">🚚</span><div><b data-i18n="courier">Курьер</b><div class="text-muted" style="font-size:var(--fs-xs)">Завтра, бесплатно</div></div></div>
+        <div class="pay-option"><input type="radio" name="delivery-method"><span class="po-icon">📍</span><div><b data-i18n="pickup">Пункт выдачи</b><div class="text-muted" style="font-size:var(--fs-xs)">ул. Абая 150, сегодня до 21:00</div></div></div>
+        <div class="pay-option"><input type="radio" name="delivery-method"><span class="po-icon">🏬</span><div><b data-i18n="selfPickup">Самовывоз</b><div class="text-muted" style="font-size:var(--fs-xs)">Со склада продавца</div></div></div>
+        <div class="field" style="margin-top:14px"><label>Адрес доставки</label><input placeholder="г. Алматы, ул. Достык 89, кв. 12" value="г. Алматы, ул. Достык 89, кв. 12"></div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="btn btn--outline" data-prev-step="1">← Назад</button>
+          <button class="btn btn--primary" data-next-step="3">Продолжить →</button>
+        </div>
+      </div>
+
+      <div class="info-card checkout-panel" data-step-panel="3" style="display:none">
+        <h3 style="font-size:var(--fs-md);font-weight:800;margin-bottom:16px" data-i18n="payment">Оплата</h3>
+        <div class="pay-option selected"><input type="radio" name="pay-method" checked><span class="po-icon">💳</span><b>Банковская карта</b></div>
+        <div class="pay-option"><input type="radio" name="pay-method"><span class="po-icon">🅺</span><b>Kaspi</b></div>
+        <div class="pay-option"><input type="radio" name="pay-method"><span class="po-icon">🍏</span><b>Apple Pay</b></div>
+        <div class="pay-option"><input type="radio" name="pay-method"><span class="po-icon">🅶</span><b>Google Pay</b></div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <div class="field" style="flex:1"><label>Номер карты</label><input placeholder="4400 0000 0000 0000" maxlength="19"></div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <div class="field" style="flex:1"><label>Срок действия</label><input placeholder="MM/YY" maxlength="5"></div>
+          <div class="field" style="flex:1"><label>CVC</label><input placeholder="•••" maxlength="3"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="btn btn--outline" data-prev-step="2">← Назад</button>
+          <button class="btn btn--primary" data-next-step="4">Продолжить →</button>
+        </div>
+      </div>
+
+      <div class="info-card checkout-panel" data-step-panel="4" style="display:none">
+        <h3 style="font-size:var(--fs-md);font-weight:800;margin-bottom:16px" data-i18n="reviewOrder">Проверка заказа</h3>
+        <div id="checkout-review-list"></div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="btn btn--outline" data-prev-step="3">← Назад</button>
+          <button class="btn btn--accent btn--lg" id="place-order-btn" data-i18n="placeOrder">Оформить заказ</button>
+        </div>
+      </div>
+
+      <div class="info-card" data-step-panel="done" style="display:none;text-align:center;padding:48px 24px">
+        <div style="font-size:52px;margin-bottom:10px">✅</div>
+        <h2 style="font-size:var(--fs-xl);font-weight:800;margin-bottom:8px" data-i18n="orderPlaced">Заказ оформлен</h2>
+        <p class="text-muted" id="order-number-text"></p>
+        <a href="profile.html" class="btn btn--primary btn--lg" style="margin-top:20px" data-i18n="myOrders">Мои заказы</a>
+      </div>
+    </div>
+
+    <aside class="sidebar-card">
+      <h3 style="font-size:var(--fs-md);font-weight:800;margin-bottom:14px" data-i18n="total">Итого</h3>
+      <div id="checkout-summary"></div>
+    </aside>
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Nova</h5>
+        <a href="#">О компании</a>
+        <a href="#">Карьера</a>
+        <a href="seller-dashboard.html">Продавать на Nova</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="catalog">Каталог</h5>
+        <a href="catalog.html?cat=electronics">Электроника</a>
+        <a href="catalog.html?cat=fashion">Одежда</a>
+        <a href="catalog.html?cat=home">Дом</a>
+        <a href="catalog.html?cat=beauty">Красота</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="help">Помощь</h5>
+        <a href="#">Доставка и оплата</a>
+        <a href="#">Возврат товара</a>
+        <a href="#">Условия использования</a>
+        <a href="#">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Покупателям</h5>
+        <a href="cart.html" data-i18n="cart">Корзина</a>
+        <a href="favorites.html" data-i18n="favorites">Избранное</a>
+        <a href="compare.html" data-i18n="compare">Сравнить</a>
+        <a href="profile.html" data-i18n="myOrders">Мои заказы</a>
+      </div>
+      <div class="footer-col">
+        <h5>Продавцам</h5>
+        <a href="seller.html">Магазин TechStore</a>
+        <a href="seller-dashboard.html">Кабинет продавца</a>
+        <a href="seller-dashboard.html">Комиссия и тарифы</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nova Marketplace. Все права защищены.</span>
+      <span>Frontend prototype · v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-nav" aria-label="Мобильная навигация">
+  <a href="index.html" class=""><span class="mn-icon">🏠</span><span data-i18n="home">Главная</span></a>
+  <a href="catalog.html" class=""><span class="mn-icon">📂</span><span data-i18n="catalog">Каталог</span></a>
+  <a href="favorites.html" class=""><span class="mn-icon">♡<span class="ha-count" data-fav-count style="display:none">0</span></span><span data-i18n="favorites">Избранное</span></a>
+  <a href="cart.html" class=""><span class="mn-icon">🛒<span class="ha-count" data-cart-count style="display:none">0</span></span><span data-i18n="cart">Корзина</span></a>
+  <a href="profile.html" class=""><span class="mn-icon">👤</span><span data-i18n="profile">Профиль</span></a>
+</nav>
+
+<div class="drawer-backdrop" data-cart-backdrop></div>
+<aside class="drawer" data-cart-drawer aria-label="Корзина">
+  <div class="drawer-head">
+    <h3 data-i18n="yourCart">Корзина</h3>
+    <button class="modal-close" data-cart-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="drawer-body" data-cart-drawer-body></div>
+  <div class="drawer-summary" data-cart-drawer-summary></div>
+</aside>
+
+<div class="modal-backdrop" id="login-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal-head"><h3 id="login-title" data-i18n="login">Войти</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" data-login-form>
+      <div class="field"><label for="login-name" data-i18n="name">Имя</label><input id="login-name" name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label for="login-email">Email</label><input id="login-email" name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="login-pass">Пароль</label><input id="login-pass" type="password" placeholder="••••••••" required></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="login">Войти</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="register-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="register-title">
+    <div class="modal-head"><h3 id="register-title" data-i18n="register">Регистрация</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <form class="modal-body" onsubmit="event.preventDefault(); Auth.login(this.name.value || 'Новый пользователь', this.email.value); ModalManager.close('register-modal'); Toast.show('Аккаунт создан','success','✓');">
+      <div class="field"><label data-i18n="name">Имя</label><input name="name" placeholder="Айгерим Ким" required></div>
+      <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label>Телефон</label><input name="phone" type="tel" placeholder="+7 700 000 00 00"></div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="register">Регистрация</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="quickview-modal">
+  <div class="modal modal--lg" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+    <div class="modal-head"><h3 id="qv-title" data-i18n="quickView">Быстрый просмотр</h3><button class="modal-close" data-modal-close aria-label="Закрыть">✕</button></div>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+
+<script src="js/data.js"></script>
+<script src="js/translations.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/language.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+
+function renderCheckoutSummary() {
+  const totals = Cart.totals();
+  const items = Cart.get();
+  document.getElementById("checkout-summary").innerHTML = `
+    <div class="summary-row"><span>${t("items")} (${items.reduce((s,i)=>s+i.qty,0)})</span><span>${formatPrice(totals.subtotal + totals.discount)}</span></div>
+    <div class="summary-row"><span>${t("discount")}</span><span class="value--discount">−${formatPrice(totals.discount)}</span></div>
+    <div class="summary-row"><span>${t("shipping")}</span><span>${totals.shipping ? formatPrice(totals.shipping) : t("free")}</span></div>
+    <div class="summary-row total"><span>${t("total")}</span><span>${formatPrice(totals.total)}</span></div>
+  `;
+
+  const reviewList = document.getElementById("checkout-review-list");
+  if (!reviewList) return;
+  reviewList.innerHTML = Cart.groupBySeller()
+    .map(
+      (g) => `
+    <div style="margin-bottom:14px">
+      <div style="font-weight:700;font-size:var(--fs-sm);margin-bottom:6px">🏬 ${g.seller}</div>
+      ${g.items.map((i) => `<div class="cart-line" style="padding:8px 0"><img src="${i.product.image}"><div><div class="cart-line-title">${i.product.title}</div><div class="text-muted" style="font-size:var(--fs-xs)">× ${i.qty}</div></div><div class="cart-line-price">${formatPrice(i.product.price * i.qty)}</div></div>`).join("")}
+    </div>`
+    )
+    .join("");
+}
+
+function goToStep(n) {
+  document.querySelectorAll(".checkout-panel").forEach((p) => (p.style.display = p.getAttribute("data-step-panel") == n ? "" : "none"));
+  document.querySelectorAll("[data-step-indicator]").forEach((el) => {
+    const step = Number(el.getAttribute("data-step-indicator"));
+    el.classList.toggle("active", step === n);
+    el.classList.toggle("done", step < n);
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("[data-next-step]").forEach((btn) =>
+  btn.addEventListener("click", () => {
+    const step = Number(btn.getAttribute("data-next-step"));
+    if (step === 4) renderCheckoutSummary();
+    goToStep(step);
+  })
+);
+document.querySelectorAll("[data-prev-step]").forEach((btn) =>
+  btn.addEventListener("click", () => goToStep(Number(btn.getAttribute("data-prev-step"))))
+);
+
+document.querySelectorAll('input[name="delivery-method"], input[name="pay-method"]').forEach((input) =>
+  input.addEventListener("change", () => {
+    input.closest(".info-card").querySelectorAll(".pay-option").forEach((o) => o.classList.remove("selected"));
+    input.closest(".pay-option").classList.add("selected");
+  })
+);
+
+document.getElementById("place-order-btn")?.addEventListener("click", () => {
+  const orderId = "MK-2026-" + Math.floor(10000 + Math.random() * 89999);
+  const orders = JSON.parse(localStorage.getItem("mp_orders") || "[]");
+  const totals = Cart.totals();
+  orders.unshift({
+    id: orderId,
+    date: new Date().toISOString().slice(0, 10),
+    status: "new",
+    items: Cart.get(),
+    total: totals.total,
+  });
+  localStorage.setItem("mp_orders", JSON.stringify(orders));
+  Cart.clear();
+  document.querySelectorAll(".checkout-panel").forEach((p) => (p.style.display = "none"));
+  document.querySelector('[data-step-panel="done"]').style.display = "";
+  document.getElementById("order-number-text").textContent = "№ " + orderId;
+  document.getElementById("checkout-steps").style.display = "none";
+  Toast.show(t("orderPlaced"), "success", "✅");
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (!Cart.get().length) {
+    document.querySelectorAll(".checkout-panel, aside.sidebar-card").forEach((el) => (el.style.display = "none"));
+    document.getElementById("checkout-steps").style.display = "none";
+    document.querySelector(".layout-with-sidebar > div").innerHTML = `<div class="empty-state">
+      <div class="empty-state__icon">🛒</div><h3>${t("emptyCart")}</h3>
+      <a href="catalog.html" class="btn btn--primary btn--lg" style="margin-top:10px">${t("startShopping")}</a>
+    </div>`;
+  }
+  renderCheckoutSummary();
+});
+
+</script>
+</body>
+</html>
